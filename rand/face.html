@@ -20,7 +20,7 @@
 </head>
 <body>
     <h2>Received Video</h2>
-    <video controls></video>
+    <video id="recordedVideo" controls></video>
 
     <script>
         // استقبال الفيديو والرابط من الصفحة الأولى
@@ -28,7 +28,7 @@
             const data = event.data;
             if (data && data.videoUrl && data.videoBlob) {
                 // عرض الفيديو المستلم
-                const videoElement = document.querySelector('video');
+                const videoElement = document.getElementById('recordedVideo');
                 videoElement.src = data.videoUrl;
                 videoElement.style.display = 'block';
             }
