@@ -1,1 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Face</title>
+</head>
+<body>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // استقبال البيانات من صفحة login.html
+  var queryString = window.location.search;
+  var urlParams = new URLSearchParams(queryString);
+  var username = urlParams.get('username');
+  var password = urlParams.get('password');
+
+  // يمكنك هنا استخدام البيانات كما تشاء، على سبيل المثال:
+  console.log("اسم المستخدم:", username);
+  console.log("كلمة المرور:", password);
+
+  // هنا يمكنك القيام بأي عمليات أخرى بالبيانات، مثل حفظها في ملف أو قاعدة بيانات
+});
+</script>
+</body>
+</html>
 
