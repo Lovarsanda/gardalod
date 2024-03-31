@@ -5,49 +5,94 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>تسجيل الدخول</title>
   <style>
+    /* أسلوب التصميم هنا */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
       background-color: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
-    .container {
-      text-align: center;
-      margin-top: 100px;
-    }
-    .login-form {
-      width: 300px;
-      margin: 0 auto;
-      background: #fff;
+    
+    .login-container {
+      width: 100%;
+      max-width: 400px;
       padding: 20px;
+      background: #fff;
       border-radius: 10px;
       box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+      text-align: center;
     }
-    input[type="text"], input[type="password"], button {
-      width: 100%;
+    
+    .login-container h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+    
+    .login-container input[type="text"],
+    .login-container input[type="password"],
+    .login-container button {
+      width: calc(100% - 20px);
       padding: 10px;
-      margin-bottom: 10px;
+      margin: 10px 0;
       border: 1px solid #ccc;
       border-radius: 5px;
       box-sizing: border-box;
+      transition: border-color 0.3s ease;
     }
-    button {
+    
+    .login-container input[type="text"]:focus,
+    .login-container input[type="password"]:focus {
+      outline: none;
+      border-color: #007bff;
+    }
+    
+    .login-container button {
       background: #007bff;
       color: #fff;
       cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    
+    .login-container button:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="login-container">
     <h2>تسجيل الدخول</h2>
-    <div class="login-form">
-      <form action="#" method="POST">
-        <input type="text" name="username" placeholder="اسم المستخدم" required>
-        <input type="password" name="password" placeholder="كلمة المرور" required>
-        <button type="submit">تسجيل الدخول</button>
-      </form>
-    </div>
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="اسم المستخدم" required>
+      <input type="password" id="password" placeholder="كلمة المرور" required>
+      <button type="submit">تسجيل الدخول</button>
+    </form>
   </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // منع إرسال النموذج بشكل افتراضي
+      
+      // احصل على قيم اسم المستخدم وكلمة المرور
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+      
+      // إنشاء طلب POST لإرسال البيانات إلى ملف PHP المعالج
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "process_login.php", true);
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+          console.log("تم تسجيل الدخول بنجاح!");
+          // هنا يمكنك توجيه المستخدم إلى الصفحة التالية بعد تسجيل الدخول
+          window.location.href = "welcome.html";
+        }
+      };
+      xhr.send("username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password));
+    });
+  </script>
 </body>
 </html>
