@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>مثل تويتر</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -11,31 +12,65 @@
       padding: 0;
       background-color: #f5f8fa;
     }
-    .container {
-      display: flex;
-    }
-    .sidebar {
-      flex: 0 0 250px;
-      background-color: #fff;
-      border-right: 1px solid #e1e8ed;
-      padding: 20px;
-    }
-    .main-content {
-      flex: 1;
-      padding: 20px;
-    }
     .header {
+      background-color: #fff;
+      border-bottom: 1px solid #e1e8ed;
+      padding: 10px 15px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
+    }
+    .header h1 {
+      font-size: 20px;
+      margin: 0;
+    }
+    .header button {
+      background-color: #1da1f2;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 16px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .header button:hover {
+      background-color: #0d8ddb;
+    }
+    .content {
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+    }
+    .sidebar {
+      width: 25%;
+      padding: 0 10px;
+    }
+    .sidebar ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    .sidebar li {
+      margin-bottom: 10px;
+    }
+    .sidebar li a {
+      text-decoration: none;
+      color: #1da1f2;
+      display: flex;
+      align-items: center;
+    }
+    .sidebar li a i {
+      margin-right: 10px;
+    }
+    .feed {
+      width: 50%;
+      border-right: 1px solid #e1e8ed;
+      border-left: 1px solid #e1e8ed;
+      padding: 0 10px;
     }
     .tweet {
-      background-color: #fff;
-      border: 1px solid #e1e8ed;
-      border-radius: 5px;
-      padding: 10px;
-      margin-bottom: 20px;
+      border-bottom: 1px solid #e1e8ed;
+      padding: 10px 0;
     }
     .tweet h2 {
       margin-top: 0;
@@ -45,50 +80,38 @@
       margin: 0;
     }
     .widgets {
-      background-color: #fff;
-      border-left: 1px solid #e1e8ed;
-      padding: 20px;
-      width: 250px;
+      width: 25%;
+      padding: 0 10px;
     }
     .widget {
       margin-bottom: 20px;
     }
+    .widget h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="header">
+    <h1>تويتر</h1>
+    <button>غرد</button>
+  </div>
+  <div class="content">
     <div class="sidebar">
       <ul>
-        <li>الصفحة الرئيسية</li>
-        <li>الاكتشاف</li>
-        <li>الإشعارات</li>
-        <li>الرسائل</li>
-        <li>الملف الشخصي</li>
+        <li><a href="#"><i class="fas fa-home"></i>الصفحة الرئيسية</a></li>
+        <li><a href="#"><i class="fas fa-hashtag"></i>الاكتشاف</a></li>
+        <li><a href="#"><i class="fas fa-bell"></i>الإشعارات</a></li>
+        <li><a href="#"><i class="fas fa-envelope"></i>الرسائل</a></li>
+        <!-- أضف المزيد من العناصر هنا -->
       </ul>
     </div>
-    <div class="main-content">
-      <div class="header">
-        <h1>تويتر</h1>
-        <button>غرد</button>
-      </div>
-      <div class="tweet">
-        <h2>مستخدم 1</h2>
-        <p>محتوى التغريدة 1</p>
-      </div>
-      <div class="tweet">
-        <h2>مستخدم 2</h2>
-        <p>محتوى التغريدة 2</p>
-      </div>
+    <div class="feed">
+      <!-- إضافة تغذية تويتر هنا -->
     </div>
     <div class="widgets">
-      <div class="widget">
-        <h3>المتابعون</h3>
-        <p>عدد المتابعين: 100</p>
-      </div>
-      <div class="widget">
-        <h3>الإعلانات</h3>
-        <p>لا إعلانات حاليًا</p>
-      </div>
+      <!-- إضافة الأدوات هنا -->
     </div>
   </div>
 </body>
