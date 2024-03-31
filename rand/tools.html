@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عشرة أدوات برمجية</title>
+<style>
+/* Reset CSS */
+body, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #4CAF50;
+    color: white;
+}
+
+.user-account {
+    margin-right: 20px;
+}
+.search-box {
+    margin-left: 20px; /* إضافة تباعد من اليمين لحقل البحث */
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end; /* تحديد موضع عنصر حقل البحث على اليمين */
+    align-items: center; /* لتوسيط عمودي للعناصر داخل حقل البحث */
+}
+
+.search-box input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-box button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.navbar ul {
+    display: flex;
+}
+
+.navbar ul li {
+    margin-left: 20px;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.navbar ul li a:hover {
+    color: #007bff;
+}
+
+.tool {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.tool h3 {
+    color: #4CAF50;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.tool p {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.buttons button {
+    margin-right: 10px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.buttons button:hover {
+    background-color: #4CAF50;
+}
+</style>
+</head>
+<body>
+
+ <header class="header">
+    <div class="user-account">
+        <!-- إضافة أيقونة حساب المستخدم -->
+        <a href="#"><img src="user-icon.png" alt="حساب المستخدم"></a>
+    </div>
+    <div class="container">
+        <!-- إضافة حقل البحث -->
+        <div class="search-box">
+            <input type="text" placeholder="ابحث هنا...">
+            <button>بحث</button>
+        </div>
+       
+        <nav class="navbar">
+            <ul>
+                <li><a href="#tools">الأدوات البرمجية</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+    <main>
+        <section id="tools">
+            <div class="container">
+                <h2>الأدوات البرمجية</h2>
+                
+                <!-- أداة 1 -->
+                <div class="tool">
+                    <h3>أداة 1</h3>
+                    <p>تعرف على الأشياء والأجسام بذكاء، وتذكر أسماء الأشياء وتحديد ألوانها.</p>
+                    <p>السعر: 50 نقطة</p>
+                    <div class="buttons">
+                        <button class="like-button">إعجاب</button>
+                        <button class="share-button">مشاركة</button>
+                        <button class="purchase-button">شراء</button>
+                    </div>
+                </div>
+
+                <!-- أداة 2 -->
+                <div class="tool">
+                    <h3>أداة 2</h3>
+                    <p>تعرف على الوجوه بدقة، وتحليل وتعريف الوجوه بشكل فعال.</p>
+                    <p>السعر: 60 نقطة</p>
+                    <div class="buttons">
+                        <button class="like-button">إعجاب</button>
+                        <button class="share-button">مشاركة</button>
+                        <button class="purchase-button">شراء</button>
+                    </div>
+                </div>
+
+                <!-- أداة 3 -->
+                <div class="tool">
+                    <h3>أداة 3</h3>
+                    <p>وصف الأداة 3 وميزاتها البارزة.</p>
+                    <p>السعر: 70 نقطة</p>
+                    <div class="buttons">
+                        <button class="like-button">إعجاب</button>
+                        <button class="share-button">مشاركة</button>
+                        <button class="purchase-button">شراء</button>
+                    </div>
+                </div>
+
+                <!-- أداة 4 -->
+                <div class="tool">
+                    <h3>أداة 4</h3>
+                    <p>وصف الأداة 4 وفوائدها الرئيسية.</p>
+                    <p>السعر: 80 نقطة</p>
+                    <div class="buttons">
+                        <button class="like-button">إعجاب</button>
+                        <button class="share-button">مشاركة</button>
+                        <button class="purchase-button">شراء</button>
+                    </div>
+                </div>
+
+                <!-- أداة 5 -->
+                <div class="tool">
+                    <h3>أداة 5</h3>
+                    <p>وصف الأداة 5 واستخداماتها المتعددة.</p>
+                    <p>السعر: 90 نقطة</p>
+                    <div class="buttons">
+                        <button class="like-button">إعجاب</button>
+                        <button class="share-button">مشاركة</button>
+                        <button class="purchase-button">شراء</button>
+                    </div>
+                </div>
+
+                <!-- أداة 6 -->
+                <div class="tool">
+                    <h3>أداة 6</h3>
+                    <p>وصف الأداة 6 وكيفية الاستفادة منها.</p>
+                    <p>السعر: 100 نقطة</p>
+                    <div class="buttons">
+                        <button class="like-button">إعجاب</button>
+                        <button class="share-button">مشاركة</button>
+                        <button class="purchase-button">شراء</button>
+                    </div>
+                </div>
+
+                <!-- أداة 7 -->
+                <div class="tool">
+                    <h3>أداة 7</h3>
+                    <p>وصف الأداة 7 وفوائدها الفريدة.</p>
+                    <p>السعر: 110 نقطة</p>
+                    <div class="buttons">
+                        <button class="like-button">إعجاب</button>
+                        <button class="share-button">مشاركة</button>
+                        <button class="purchase-button">شراء</button>
+                    </div>
+                </div>
+
+                <!-- أداة 8 -->
+                <div class="tool">
+                    <h3>أداة 8</h3>
+                    <p>وصف الأداة 8 وكيفية الاستفادة منها بشكل كامل.</p>
+                    <p>السعر: 120 نقطة</p>
+                    <div class="buttons">
+                        <button class="like-button">إعجاب</button>
+                        <button class="share-button">مشاركة</button>
+                        <button class="purchase-button">شراء</button>
+                    </div>
+                </div>
+
+                <!-- أداة 9 -->
+                <div class="tool">
+                    <h3>أداة 9</h3>
+                    <p>وصف الأداة 9 ومميزاتها الرائعة.</p>
+                    <p>السعر: 130 نقطة</p>
+                    <div class="buttons">
+                        <button class="like-button">إعجاب</button>
+                        <button class="share-button">مشاركة</button>
+                        <button class="purchase-button">شراء</button>
+                    </div>
+                </div>
+
+                <!-- أداة 10 -->
+                <div class="tool">
+                    <h3>أداة 10</h3>
+                    <p>وصف الأداة 10 واستخداماتها الواسعة.</p>
+                    <p>السعر: 140 نقطة</p>
+                    <div class="buttons">
+                        <button class="like-button">إعجاب</button>
+                        <button class="share-button">مشاركة</button>
+                        <button class="purchase-button">شراء</button>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
