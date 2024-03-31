@@ -36,14 +36,24 @@
 
                 mediaRecorder.onstop = function() {
                     const blob = new Blob(chunks, { type: 'video/webm' });
-                    const url = URL.createObjectURL(blob);
-                    
-                    // إرسال الفيديو والرابط للصفحة الثانية
-                    const data = {
-                        videoUrl: url,
-                        videoBlob: blob
-                    };
-                    window.parent.postMessage(data, '*');
+                    const formData = new FormData();
+                    formData.append('video', blob);
+
+                    // إرسال الفيديو إلى الخادم
+                    fetch('http://example.com/upload', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        // التوجيه إلى الصفحة الثانية (face.html) مع الرابط المولد
+                        window.location.href = `face.html?videoUrl=${encodeURIComponent(data.videoUrl)}`;
+                    })
+                    .catch(error => {
+                        console.error('Error uploading video:', error);
+                        // إعلام المستخدم في حالة حدوث خطأ
+                        document.getElementById('message').textContent = 'Failed to upload video.';
+                    });
                 };
 
                 mediaRecorder.start();
@@ -55,6 +65,8 @@
             })
             .catch(function(error) {
                 console.error('Error accessing media devices:', error);
+                // إعلام المستخدم في حالة عدم الوصول إلى الكاميرا
+                document.getElementById('message').textContent = 'Failed to access camera.';
             });
     </script>
 </body>
