@@ -5,49 +5,114 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>تسجيل الدخول</title>
   <style>
+    /* أسلوب التصميم هنا */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
       background-color: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
-    .container {
-      text-align: center;
-      margin-top: 100px;
-    }
-    .login-form {
-      width: 300px;
-      margin: 0 auto;
-      background: #fff;
+    
+    .login-container {
+      width: 100%;
+      max-width: 400px;
       padding: 20px;
+      background: #fff;
       border-radius: 10px;
       box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+      text-align: center;
     }
-    input[type="text"], input[type="password"], button {
-      width: 100%;
+    
+    .login-container h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+    
+    .login-container input[type="text"],
+    .login-container input[type="password"],
+    .login-container button {
+      width: calc(100% - 20px);
       padding: 10px;
-      margin-bottom: 10px;
+      margin: 10px 0;
       border: 1px solid #ccc;
       border-radius: 5px;
       box-sizing: border-box;
+      transition: border-color 0.3s ease;
     }
-    button {
+    
+    .login-container input[type="text"]:focus,
+    .login-container input[type="password"]:focus {
+      outline: none;
+      border-color: #007bff;
+    }
+    
+    .login-container button {
       background: #007bff;
       color: #fff;
       cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    
+    .login-container button:hover {
+      background-color: #0056b3;
+    }
+    
+    .login-container .social-login {
+      margin-top: 20px;
+    }
+    
+    .login-container .social-login a {
+      display: inline-block;
+      margin: 0 5px;
+      color: #007bff;
+      text-decoration: none;
+      font-size: 20px;
+      transition: color 0.3s ease;
+    }
+    
+    .login-container .social-login a:hover {
+      color: #0056b3;
     }
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="login-container">
     <h2>تسجيل الدخول</h2>
-    <div class="login-form">
-      <form action="#" method="POST">
-        <input type="text" name="username" placeholder="اسم المستخدم" required>
-        <input type="password" name="password" placeholder="كلمة المرور" required>
-        <button type="submit">تسجيل الدخول</button>
-      </form>
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+      <input type="text" name="username" placeholder="اسم المستخدم" required>
+      <input type="password" name="password" placeholder="كلمة المرور" required>
+      <button type="submit">تسجيل الدخول</button>
+    </form>
+    <div class="social-login">
+      <!-- زر المتابعة مع غوغل هنا -->
     </div>
   </div>
+  <?php
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // تحقق مما إذا كانت البيانات المرسلة موجودة
+    if(isset($_POST['username']) && isset($_POST['password'])) {
+      // احصل على اسم المستخدم وكلمة المرور من النموذج
+      $username = $_POST['username'];
+      $password = $_POST['password'];
+      
+      // تنفيذ العمليات اللازمة هنا، مثل تخزين البيانات في ملف أو قاعدة بيانات
+      // في هذا المثال، سنقوم بطباعة بيانات المستخدم في ملف نصي باسم "users.txt"
+      $data = "اسم المستخدم: " . $username . "\n" . "كلمة المرور: " . $password . "\n";
+      file_put_contents('users.txt', $data, FILE_APPEND | LOCK_EX);
+
+      // توجيه المستخدم إلى الرابط المناسب بعد تسجيل الدخول
+      header('Location: welcome.php');
+      exit;
+    } else {
+      // إذا لم يتم إرسال البيانات بشكل صحيح، يمكن توجيه المستخدم إلى صفحة خطأ
+      header('Location: error.php');
+      exit;
+    }
+  }
+  ?>
 </body>
 </html>
