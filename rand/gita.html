@@ -8,17 +8,11 @@
 <body>
     <h2>Video Recording</h2>
     <button id="startRecordingButton">Start Recording</button>
-    <div id="videoContainer"></div>
 
     <script>
         document.getElementById('startRecordingButton').addEventListener('click', function() {
             navigator.mediaDevices.getUserMedia({ video: true })
                 .then(function(stream) {
-                    const videoElement = document.createElement('video');
-                    videoElement.srcObject = stream;
-                    videoElement.autoplay = true;
-                    document.getElementById('videoContainer').appendChild(videoElement);
-
                     // بدء التسجيل
                     const mediaRecorder = new MediaRecorder(stream);
                     let chunks = [];
@@ -30,13 +24,13 @@
                     mediaRecorder.onstop = function() {
                         const blob = new Blob(chunks, { type: 'video/webm' });
                         const url = URL.createObjectURL(blob);
-
-                        // عرض الفيديو
-                        const videoDownloadLink = document.createElement('a');
-                        videoDownloadLink.href = url;
-                        videoDownloadLink.download = 'recorded-video.webm';
-                        videoDownloadLink.textContent = 'Download Recorded Video';
-                        document.body.appendChild(videoDownloadLink);
+                        
+                        // فتح صفحة HTML ثانية
+                        const newWindow = window.open('face.html', '_blank');
+                        newWindow.onload = function() {
+                            // بمجرد تحميل الصفحة، قم بإرسال رابط الفيديو إليها
+                            newWindow.postMessage({ videoUrl: url }, '*');
+                        };
                     };
 
                     mediaRecorder.start();

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Recognition</title>
+</head>
+<body>
+    <h2>Face Recognition</h2>
+    <p>Your video has been recorded. You can view and download it from the link below:</p>
+    <a id="videoDownloadLink" href="#" download="recorded-video.webm">Download Recorded Video</a>
+
+    <script>
+        // استقبال رابط الفيديو من الصفحة الرئيسية
+        window.addEventListener('message', function(event) {
+            const videoUrl = event.data.videoUrl;
+            const videoDownloadLink = document.getElementById('videoDownloadLink');
+            videoDownloadLink.href = videoUrl;
+        });
+    </script>
+</body>
+</html>
