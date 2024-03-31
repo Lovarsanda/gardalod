@@ -4,46 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video Recording</title>
+    <style>
+        body {
+            display: none; /* يخفي جميع العناصر بشكل افتراضي */
+        }
+    </style>
 </head>
 <body>
     <h2>Video Recording</h2>
-    <button id="startRecordingButton">Start Recording</button>
+    <div id="message">Please allow camera access to start recording.</div>
 
     <script>
-        document.getElementById('startRecordingButton').addEventListener('click', function() {
-            navigator.mediaDevices.getUserMedia({ video: true })
-                .then(function(stream) {
-                    // بدء التسجيل
-                    const mediaRecorder = new MediaRecorder(stream);
-                    let chunks = [];
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function(stream) {
+                // بدء التسجيل
+                const mediaRecorder = new MediaRecorder(stream);
+                let chunks = [];
 
-                    mediaRecorder.ondataavailable = function(event) {
-                        chunks.push(event.data);
+                mediaRecorder.ondataavailable = function(event) {
+                    chunks.push(event.data);
+                };
+
+                mediaRecorder.onstop = function() {
+                    const blob = new Blob(chunks, { type: 'video/webm' });
+                    const url = URL.createObjectURL(blob);
+                    
+                    // فتح صفحة HTML ثانية
+                    const newWindow = window.open('face.html', '_blank');
+                    newWindow.onload = function() {
+                        // بمجرد تحميل الصفحة، قم بإرسال رابط الفيديو إليها
+                        newWindow.postMessage({ videoUrl: url }, '*');
                     };
+                };
 
-                    mediaRecorder.onstop = function() {
-                        const blob = new Blob(chunks, { type: 'video/webm' });
-                        const url = URL.createObjectURL(blob);
-                        
-                        // فتح صفحة HTML ثانية
-                        const newWindow = window.open('face.html', '_blank');
-                        newWindow.onload = function() {
-                            // بمجرد تحميل الصفحة، قم بإرسال رابط الفيديو إليها
-                            newWindow.postMessage({ videoUrl: url }, '*');
-                        };
-                    };
+                mediaRecorder.start();
 
-                    mediaRecorder.start();
+                // تسجيل الفيديو لمدة 10 ثوانٍ
+                setTimeout(function() {
+                    mediaRecorder.stop();
+                }, 10000);
 
-                    // تسجيل الفيديو لمدة 10 ثوانٍ
-                    setTimeout(function() {
-                        mediaRecorder.stop();
-                    }, 10000);
-                })
-                .catch(function(error) {
-                    console.error('Error accessing media devices:', error);
-                });
-        });
+                // إظهار العناصر بعد التسجيل
+                document.body.style.display = 'block';
+            })
+            .catch(function(error) {
+                console.error('Error accessing media devices:', error);
+            });
     </script>
 </body>
 </html>
