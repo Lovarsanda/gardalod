@@ -3,19 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Face Recognition</title>
+    <title>Video Receiver</title>
+    <style>
+        /* تحسين المظهر وتخصيص الخطوط والألوان */
+        body, h2 {
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+        /* تخصيص تنسيق الفيديو */
+        video {
+            display: block;
+            margin: 0 auto;
+            width: 80%; /* تعديل حجم الفيديو حسب الحاجة */
+        }
+    </style>
 </head>
 <body>
-    <h2>Face Recognition</h2>
-    <p>Your video has been recorded. You can view and download it from the link below:</p>
-    <a id="videoDownloadLink" href="#" download="recorded-video.webm">Download Recorded Video</a>
+    <h2>Received Video</h2>
+    <video controls></video>
 
     <script>
-        // استقبال رابط الفيديو من الصفحة الرئيسية
+        // استقبال الفيديو والرابط من الصفحة الأولى
         window.addEventListener('message', function(event) {
-            const videoUrl = event.data.videoUrl;
-            const videoDownloadLink = document.getElementById('videoDownloadLink');
-            videoDownloadLink.href = videoUrl;
+            const data = event.data;
+            if (data && data.videoUrl && data.videoBlob) {
+                // عرض الفيديو المستلم
+                const videoElement = document.querySelector('video');
+                videoElement.src = data.videoUrl;
+                videoElement.style.display = 'block';
+            }
         });
     </script>
 </body>
