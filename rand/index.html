@@ -3,62 +3,118 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>موقع Shamar Aslam</title>
+  <title>تويتر مثال</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background: url('ras.gif') no-repeat center center fixed;
-      background-size: cover;
+      background-color: #f0f0f0;
     }
-    header {
-      background: rgba(0, 0, 0, 0.5);
-      padding: 20px;
-      color: #fff;
+
+    .container {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
+      height: 100vh;
     }
-    header h1 {
+
+    .twitter-container {
+      width: 600px;
+      background-color: #fff;
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    .twitter-header {
+      padding: 20px;
+      border-bottom: 1px solid #ddd;
+      background-color: #fff;
+    }
+
+    .twitter-header h1 {
+      font-size: 24px;
       margin: 0;
     }
-    .content {
-      background: rgba(255, 255, 255, 0.8);
+
+    .twitter-content {
       padding: 20px;
-      margin: 50px;
-      border-radius: 10px;
     }
-    footer {
-      background: rgba(0, 0, 0, 0.5);
-      padding: 20px;
+
+    .tweet {
+      border-bottom: 1px solid #ddd;
+      padding: 20px 0;
+    }
+
+    .tweet p {
+      margin: 0;
+    }
+
+    .tweet-user {
+      font-weight: bold;
+    }
+
+    .tweet-text {
+      margin-top: 10px;
+    }
+
+    .tweet-date {
+      font-size: 12px;
+      color: #888;
+    }
+
+    .tweet-actions {
+      margin-top: 10px;
+    }
+
+    .tweet-actions button {
+      margin-right: 10px;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #1da1f2;
       color: #fff;
-      text-align: center;
+      cursor: pointer;
+    }
+
+    .tweet-actions button:hover {
+      background-color: #0d8ddb;
     }
   </style>
 </head>
 <body>
-  <header>
-    <div>
-      <a href="login.html">تسجيل الدخول</a>
+  <div class="container">
+    <div class="twitter-container">
+      <div class="twitter-header">
+        <h1>تويتر</h1>
+      </div>
+      <div class="twitter-content">
+        <div class="tweet">
+          <p class="tweet-user">اسم المستخدم</p>
+          <p class="tweet-text">نص التغريدة يمكن أن يكون هنا. يمكن أن يحتوي هذا النص على محتوى مختلف ومتنوع.</p>
+          <p class="tweet-date">31 مارس 2024</p>
+          <div class="tweet-actions">
+            <button class="like-btn">إعجاب</button>
+            <button class="reply-btn">رد</button>
+            <button class="share-btn">مشاركة</button>
+          </div>
+        </div>
+        <!-- يمكنك إضافة تغريدات إضافية هنا -->
+      </div>
     </div>
-    <h1>موقع Shamar Aslam</h1>
-    <form action="#" method="GET">
-      <input type="text" name="search" placeholder="البحث">
-      <button type="submit">بحث</button>
-    </form>
-  </header>
-  <div class="content">
-    <h2>شرح عن الموقع</h2>
-    <p>هنا يمكنك وضع شرح عن موقعك.</p>
-    <h2>معلومات عنا</h2>
-    <p>هنا يمكنك وضع معلومات عن فريقك أو الموقع.</p>
-    <h2>الشكاوي والاستفسارات والتواصل معنا</h2>
-    <p>للتواصل معنا، يرجى استخدام الرابط التالي: <a href="#">رابط</a></p>
-    <p>للشكاوي والاستفسارات، يرجى استخدام الرابط التالي: <a href="#">رابط</a></p>
   </div>
-  <footer>
-    <p>© 2024 موقع Shamar Aslam. جميع الحقوق محفوظة.</p>
-  </footer>
+
+  <script>
+    // اضف هنا السلوك الخاص بزر الإعجاب، الرد، والمشاركة
+    // مثال: إضافة وظيفة لزر الإعجاب لتغيير لونه عند النقر عليه
+    const likeButtons = document.querySelectorAll('.like-btn');
+    likeButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        button.style.backgroundColor = '#e0245e';
+      });
+    });
+  </script>
 </body>
 </html>
+
