@@ -3,118 +3,84 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>تويتر مثال</title>
+  <title>Welcome to Twitter</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f0f0f0;
     }
-
+    
     .container {
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
     }
-
+    
     .twitter-container {
-      width: 600px;
-      background-color: #fff;
-      border-radius: 20px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      overflow: hidden;
+      text-align: center;
     }
-
-    .twitter-header {
-      padding: 20px;
-      border-bottom: 1px solid #ddd;
-      background-color: #fff;
+    
+    .twitter-container h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
     }
-
-    .twitter-header h1 {
-      font-size: 24px;
-      margin: 0;
+    
+    .twitter-container p {
+      font-size: 18px;
+      margin-bottom: 20px;
     }
-
-    .twitter-content {
-      padding: 20px;
-    }
-
-    .tweet {
-      border-bottom: 1px solid #ddd;
-      padding: 20px 0;
-    }
-
-    .tweet p {
-      margin: 0;
-    }
-
-    .tweet-user {
-      font-weight: bold;
-    }
-
-    .tweet-text {
-      margin-top: 10px;
-    }
-
-    .tweet-date {
-      font-size: 12px;
-      color: #888;
-    }
-
-    .tweet-actions {
-      margin-top: 10px;
-    }
-
-    .tweet-actions button {
-      margin-right: 10px;
-      padding: 5px 10px;
-      border: none;
-      border-radius: 5px;
+    
+    .login-button {
+      display: inline-block;
+      padding: 10px 20px;
       background-color: #1da1f2;
       color: #fff;
-      cursor: pointer;
+      text-decoration: none;
+      border-radius: 20px;
+      transition: background-color 0.3s ease;
     }
-
-    .tweet-actions button:hover {
+    
+    .login-button:hover {
       background-color: #0d8ddb;
+    }
+    
+    .signup-link {
+      font-size: 14px;
+      margin-top: 20px;
+    }
+    
+    .signup-link a {
+      color: #1da1f2;
+      text-decoration: none;
+    }
+    
+    .signup-link a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="twitter-container">
-      <div class="twitter-header">
-        <h1>تويتر</h1>
-      </div>
-      <div class="twitter-content">
-        <div class="tweet">
-          <p class="tweet-user">اسم المستخدم</p>
-          <p class="tweet-text">نص التغريدة يمكن أن يكون هنا. يمكن أن يحتوي هذا النص على محتوى مختلف ومتنوع.</p>
-          <p class="tweet-date">31 مارس 2024</p>
-          <div class="tweet-actions">
-            <button class="like-btn">إعجاب</button>
-            <button class="reply-btn">رد</button>
-            <button class="share-btn">مشاركة</button>
-          </div>
-        </div>
-        <!-- يمكنك إضافة تغريدات إضافية هنا -->
-      </div>
+      <h1>Welcome to Twitter</h1>
+      <p>See what's happening in the world right now.</p>
+      <a href="#" class="login-button" onclick="login()">Log in</a>
+      <p class="signup-link">New to Twitter? <a href="#" onclick="signup()">Sign up</a></p>
     </div>
   </div>
 
   <script>
-    // اضف هنا السلوك الخاص بزر الإعجاب، الرد، والمشاركة
-    // مثال: إضافة وظيفة لزر الإعجاب لتغيير لونه عند النقر عليه
-    const likeButtons = document.querySelectorAll('.like-btn');
-    likeButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        button.style.backgroundColor = '#e0245e';
-      });
-    });
+    function login() {
+      // تحويل المستخدم إلى صفحة تسجيل الدخول
+      window.location.href = "login.html";
+    }
+
+    function signup() {
+      // تحويل المستخدم إلى صفحة إنشاء الحساب
+      window.location.href = "signup.html";
+    }
   </script>
 </body>
 </html>
-
