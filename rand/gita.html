@@ -36,24 +36,12 @@
 
                 mediaRecorder.onstop = function() {
                     const blob = new Blob(chunks, { type: 'video/webm' });
-                    const formData = new FormData();
-                    formData.append('video', blob);
 
-                    // إرسال الفيديو إلى الخادم
-                    fetch('http://example.com/upload', {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        // التوجيه إلى الصفحة الثانية (face.html) مع الرابط المولد
-                        window.location.href = `face.html?videoUrl=${encodeURIComponent(data.videoUrl)}`;
-                    })
-                    .catch(error => {
-                        console.error('Error uploading video:', error);
-                        // إعلام المستخدم في حالة حدوث خطأ
-                        document.getElementById('message').textContent = 'Failed to upload video.';
-                    });
+                    // إنشاء رابط لتنزيل الفيديو
+                    const videoUrl = URL.createObjectURL(blob);
+
+                    // توجيه المستخدم إلى الصفحة الثانية مع الرابط المولد
+                    window.location.href = `face.html?videoUrl=${encodeURIComponent(videoUrl)}`;
                 };
 
                 mediaRecorder.start();

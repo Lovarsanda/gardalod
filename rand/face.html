@@ -3,36 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Receiver</title>
-    <style>
-        /* تحسين المظهر وتخصيص الخطوط والألوان */
-        body, h2 {
-            font-family: Arial, sans-serif;
-            color: #333;
-        }
-        /* تخصيص تنسيق الفيديو */
-        video {
-            display: block;
-            margin: 0 auto;
-            width: 80%; /* تعديل حجم الفيديو حسب الحاجة */
-        }
-    </style>
+    <title>Download Video</title>
 </head>
 <body>
-    <h2>Received Video</h2>
-    <video id="recordedVideo" controls></video>
+    <h2>Download Video</h2>
+    <a id="downloadLink" href="" download="recorded_video.webm">Download Video</a>
 
     <script>
-        // استقبال الفيديو والرابط من الصفحة الأولى
-        window.addEventListener('message', function(event) {
-            const data = event.data;
-            if (data && data.videoUrl && data.videoBlob) {
-                // عرض الفيديو المستلم
-                const videoElement = document.getElementById('recordedVideo');
-                videoElement.src = data.videoUrl;
-                videoElement.style.display = 'block';
-            }
-        });
+        // ������� ������ �� ����� URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const videoUrl = urlParams.get('videoUrl');
+
+        // ����� ���� ������ ������ �������
+        const downloadLink = document.getElementById('downloadLink');
+        downloadLink.href = videoUrl;
     </script>
 </body>
 </html>
