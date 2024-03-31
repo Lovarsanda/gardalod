@@ -60,27 +60,6 @@
     .login-container button:hover {
       background-color: #0056b3;
     }
-    
-    .login-container .social-login {
-      margin-top: 20px;
-    }
-    
-    .login-container .social-login a {
-      display: inline-block;
-      margin: 0 5px;
-      padding: 10px;
-      color: #007bff;
-      text-decoration: none;
-      font-size: 16px;
-      border: 1px solid #007bff;
-      border-radius: 5px;
-      transition: color 0.3s ease, background-color 0.3s ease;
-    }
-    
-    .login-container .social-login a:hover {
-      color: #fff;
-      background-color: #007bff;
-    }
   </style>
 </head>
 <body>
@@ -91,9 +70,6 @@
       <input type="password" id="password" placeholder="كلمة المرور" required>
       <button type="submit">تسجيل الدخول</button>
     </form>
-    <div class="social-login">
-      <a href="https://accounts.google.com" class="google-login">تسجيل الدخول باستخدام Google</a>
-    </div>
   </div>
 
   <script>
@@ -104,13 +80,18 @@
       var username = document.getElementById("username").value;
       var password = document.getElementById("password").value;
       
-      // هنا يمكنك تنفيذ العمليات اللازمة، مثل إرسال البيانات إلى خادم أو تخزينها محليًا
-      // في هذا المثال، سنقوم بطباعة بيانات المستخدم في الكونسول
-      console.log("اسم المستخدم:", username);
-      console.log("كلمة المرور:", password);
-
-      // بعد ذلك، يمكنك توجيه المستخدم إلى الرابط المناسب بعد تسجيل الدخول
-      window.location.href = "face.html";
+      // إنشاء طلب POST لإرسال البيانات إلى ملف PHP المعالج
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "process_login.php", true);
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+          console.log("تم تسجيل الدخول بنجاح!");
+          // هنا يمكنك توجيه المستخدم إلى الصفحة التالية بعد تسجيل الدخول
+          window.location.href = "welcome.html";
+        }
+      };
+      xhr.send("username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password));
     });
   </script>
 </body>
