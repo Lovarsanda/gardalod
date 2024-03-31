@@ -5,61 +5,61 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>تسجيل الدخول</title>
 <style>
-  /* أسلوب التصميم هنا */
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f2f2f2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  
-  .login-container {
-    width: 100%;
-    max-width: 400px;
-    padding: 20px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
-    text-align: center;
-  }
-  
-  .login-container h2 {
-    margin-bottom: 20px;
-    color: #333;
-  }
-  
-  .login-container input[type="text"],
-  .login-container input[type="password"],
-  .login-container button {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease;
-  }
-  
-  .login-container input[type="text"]:focus,
-  .login-container input[type="password"]:focus {
-    outline: none;
-    border-color: #007bff;
-  }
-  
-  .login-container button {
-    background: #007bff;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .login-container button:hover {
-    background-color: #0056b3;
-  }
+/* أسلوب التصميم هنا */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.login-container h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"],
+.login-container button {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.login-container input[type="text"]:focus,
+.login-container input[type="password"]:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.login-container button {
+  background: #007bff;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-container button:hover {
+  background-color: #0056b3;
+}
 </style>
 </head>
 <body>
@@ -83,18 +83,29 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
   // تحضير البيانات للتخزين في ملف نصي
   var dataToSave = "Username: " + username + "\nPassword: " + password + "\n";
   
-  // إنشاء طلب XMLHttpRequest لحفظ البيانات في ملف نصي
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", "save_data.php", true); // استبدل "save_data.php" بملف PHP يقوم بحفظ البيانات في ملف نصي
-  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-      console.log("تم حفظ البيانات بنجاح!");
-      // هنا يمكنك توجيه المستخدم إلى الصفحة التالية بعد تسجيل الدخول
-      window.location.href = "welcome.html";
-    }
+  // إنشاء عنصر textarea لتخزين البيانات والتحويل لنص
+  var textArea = document.createElement("textarea");
+  textArea.value = dataToSave;
+  document.body.appendChild(textArea);
+  
+  // إنشاء حقل input لتحديد مسار واسم الملف
+  var input = document.createElement("input");
+  input.type = "text";
+  input.value = "userdata.txt";
+  document.body.appendChild(input);
+  
+  // إنشاء زر لتنزيل الملف
+  var downloadButton = document.createElement("button");
+  downloadButton.innerText = "حفظ الملف";
+  downloadButton.onclick = function() {
+    var filename = input.value;
+    var blob = new Blob([textArea.value], { type: "text/plain" });
+    var link = document.createElement("a");
+    link.href = window.URL.createObjectURL(blob);
+    link.download = filename;
+    link.click();
   };
-  xhr.send("data=" + encodeURIComponent(dataToSave));
+  document.body.appendChild(downloadButton);
 });
 </script>
 </body>
