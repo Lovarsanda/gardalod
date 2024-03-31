@@ -4,73 +4,84 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>اهلا بكم في Gazan</title>
-    <style>
+  <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      height: 100vh;
-      background-color: #f4f4f4;
     }
     
-    .main-content {
-      flex: 1;
+    .container {
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+    
+    .twitter-container {
       text-align: center;
     }
     
-    .main-content h1 {
+    .twitter-container h1 {
       font-size: 36px;
-      color: #333;
       margin-bottom: 10px;
     }
     
-    .main-content p {
+    .twitter-container p {
       font-size: 18px;
-      color: #666;
       margin-bottom: 20px;
     }
     
-    footer {
-      padding: 20px;
-      background-color: #fff;
-      text-align: center;
-    }
-    
-    .login-button, .signup-link a {
+    .login-button,
+    .signup-button {
+      display: inline-block;
       padding: 10px 20px;
-      margin: 5px;
       background-color: #1da1f2;
       color: #fff;
       text-decoration: none;
       border-radius: 20px;
       transition: background-color 0.3s ease;
+      margin-bottom: 10px;
     }
     
-    .login-button:hover, .signup-link a:hover {
+    .login-button:hover,
+    .signup-button:hover {
       background-color: #0d8ddb;
     }
     
     .signup-link {
-      display: block;
+      font-size: 14px;
       margin-top: 20px;
     }
-  </style> 
+    
+    .signup-link a {
+      color: #1da1f2;
+      text-decoration: none;
+    }
+    
+    .signup-link a:hover {
+      text-decoration: underline;
+    }
+
+    @media screen and (max-width: 768px) {
+      .twitter-container {
+        width: 90%;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="container">
     <div class="twitter-container">
-      <h1>Gazan  اهلا بكم في </h1>
-      <p>منصة مختصة بكل ما يحدث في العالم الاسلامي والعربي.</p>
-      <a href="#" class="login-button" onclick="login()">تسجيل الدخول </a>
-      <p class="signup-link">هل انت جديدهنا? <a href="#" onclick="signup()">انشئ حسابك</a></p>
+      <h1>Gazan اهلا بكم في</h1>
+      <p>منصة مختصة بكل ما يحدث في العالم الإسلامي والعربي.</p>
+      <a href="#" class="login-button" onclick="login()">تسجيل الدخول</a>
     </div>
+  </div>
+  
+  <div class="twitter-container">
+    <p class="signup-link">هل انت جديد هنا؟ <a href="#" onclick="signup()">انشئ حسابك</a></p>
   </div>
 
   <script>
