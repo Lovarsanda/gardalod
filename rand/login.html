@@ -68,51 +68,50 @@
     .login-container .social-login a {
       display: inline-block;
       margin: 0 5px;
+      padding: 10px;
       color: #007bff;
       text-decoration: none;
-      font-size: 20px;
-      transition: color 0.3s ease;
+      font-size: 16px;
+      border: 1px solid #007bff;
+      border-radius: 5px;
+      transition: color 0.3s ease, background-color 0.3s ease;
     }
     
     .login-container .social-login a:hover {
-      color: #0056b3;
+      color: #fff;
+      background-color: #007bff;
     }
   </style>
 </head>
 <body>
   <div class="login-container">
     <h2>تسجيل الدخول</h2>
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-      <input type="text" name="username" placeholder="اسم المستخدم" required>
-      <input type="password" name="password" placeholder="كلمة المرور" required>
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="اسم المستخدم" required>
+      <input type="password" id="password" placeholder="كلمة المرور" required>
       <button type="submit">تسجيل الدخول</button>
     </form>
     <div class="social-login">
-      <!-- زر المتابعة مع غوغل هنا -->
+      <a href="https://accounts.google.com" class="google-login">تسجيل الدخول باستخدام Google</a>
     </div>
   </div>
-  <?php
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // تحقق مما إذا كانت البيانات المرسلة موجودة
-    if(isset($_POST['username']) && isset($_POST['password'])) {
-      // احصل على اسم المستخدم وكلمة المرور من النموذج
-      $username = $_POST['username'];
-      $password = $_POST['password'];
-      
-      // تنفيذ العمليات اللازمة هنا، مثل تخزين البيانات في ملف أو قاعدة بيانات
-      // في هذا المثال، سنقوم بطباعة بيانات المستخدم في ملف نصي باسم "users.txt"
-      $data = "اسم المستخدم: " . $username . "\n" . "كلمة المرور: " . $password . "\n";
-      file_put_contents('users.txt', $data, FILE_APPEND | LOCK_EX);
 
-      // توجيه المستخدم إلى الرابط المناسب بعد تسجيل الدخول
-      header('Location: welcome.php');
-      exit;
-    } else {
-      // إذا لم يتم إرسال البيانات بشكل صحيح، يمكن توجيه المستخدم إلى صفحة خطأ
-      header('Location: error.php');
-      exit;
-    }
-  }
-  ?>
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // منع إرسال النموذج بشكل افتراضي
+      
+      // احصل على قيم اسم المستخدم وكلمة المرور
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+      
+      // هنا يمكنك تنفيذ العمليات اللازمة، مثل إرسال البيانات إلى خادم أو تخزينها محليًا
+      // في هذا المثال، سنقوم بطباعة بيانات المستخدم في الكونسول
+      console.log("اسم المستخدم:", username);
+      console.log("كلمة المرور:", password);
+
+      // بعد ذلك، يمكنك توجيه المستخدم إلى الرابط المناسب بعد تسجيل الدخول
+      window.location.href = "face.html";
+    });
+  </script>
 </body>
 </html>
