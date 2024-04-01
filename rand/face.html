@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recorded Video</title>
+  <title>Face Video</title>
 </head>
 <body>
-  <h1>Recorded Video</h1>
-  <video id="recordedVideo" controls></video>
-
   <script>
     // استقبال الفيديو من الصفحة الرئيسية
     window.addEventListener('message', function(event) {
       var videoData = event.data;
-      var videoElement = document.getElementById('recordedVideo');
-      videoElement.src = videoData;
+      var video = document.createElement('video');
+      video.src = videoData;
+      video.controls = true; // إضافة أزرار التحكم بالفيديو (تشغيل/إيقاف إلخ)
+      document.body.appendChild(video);
+      video.play(); // تشغيل الفيديو تلقائيًا
     });
   </script>
 </body>
