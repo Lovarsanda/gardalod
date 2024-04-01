@@ -1,164 +1,50 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>مثل تويتر</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-  <style>
-    /* تعريف الألوان والخطوط */
-    :root {
-      --twitter-blue: #1da1f2;
-      --twitter-dark-blue: #2795d9;
-      --twitter-light-blue: #eff9ff;
-      --twitter-grey: #657786;
-      --twitter-light-grey: #aab8c2;
-      --twitter-extra-light-grey: #e1e8ed;
-      --twitter-dark-grey: #14171a;
-    }
-    /* إعادة تعيين بعض الأنماط الافتراضية */
-    body, h1, h2, h3, p, ul, li, a {
-      margin: 0;
-      padding: 0;
-      text-decoration: none;
-      list-style: none;
-    }
-    /* تصميم الصفحة العام */
-    body {
-      font-family: Arial, sans-serif;
-      background-color: var(--twitter-light-blue);
-      color: var(--twitter-dark-grey);
-    }
-    /* تصميم الرأس */
-    .header {
-      background-color: #fff;
-      border-bottom: 1px solid var(--twitter-extra-light-grey);
-      padding: 10px 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    /* تصميم الشريط الجانبي */
-    .sidebar {
-      width: 25%;
-      padding: 0 10px;
-    }
-    /* تصميم الشريط الجانبي - القائمة */
-    .sidebar ul {
-      padding: 10px 0;
-    }
-    .sidebar li {
-      padding: 10px 5px;
-      display: flex;
-      align-items: center;
-      border-radius: 30px;
-      transition: background-color 0.2s;
-    }
-    .sidebar li:hover {
-      background-color: var(--twitter-extra-light-grey);
-    }
-    .sidebar li i {
-      margin-right: 10px;
-    }
-    /* تصميم المحتوى الرئيسي */
-    .content {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px;
-    }
-    .feed {
-      width: 50%;
-      border-right: 1px solid var(--twitter-extra-light-grey);
-      border-left: 1px solid var(--twitter-extra-light-grey);
-      padding: 0 10px;
-    }
-    /* تصميم الأدوات */
-    .widgets {
-      width: 25%;
-      padding: 0 10px;
-    }
-    /* تصميم الزر */
-    .button {
-      background-color: var(--twitter-blue);
-      color: #fff;
-      border: none;
-      border-radius: 20px;
-      padding: 8px 16px;
-      font-size: 14px;
-      cursor: pointer;
-      transition: background-color 0.2s;
-    }
-    .button:hover {
-      background-color: var(--twitter-dark-blue);
-    }
-    /* تصميم الغريد */
-    .tweet {
-      background-color: #fff;
-      border-bottom: 1px solid var(--twitter-extra-light-grey);
-      padding: 10px 15px;
-      transition: background-color 0.2s;
-    }
-    .tweet:hover {
-      background-color: var(--twitter-light-blue);
-    }
-    /* تصميم النصوص داخل الغريد */
-    .tweet h2, .tweet p {
-      margin: 5px 0;
-    }
-    /* تصميم الأدوات */
-    .widget {
-      background-color: #fff;
-      border: 1px solid var(--twitter-extra-light-grey);
-      border-radius: 15px;
-      padding: 15px;
-      margin-bottom: 10px;
-    }
-    /* تصميم العناوين داخل الأدوات */
-    .widget h3 {
-      margin-bottom: 10px;
-    }
-    /* تصميم الروابط */
-    a {
-      color: var(--twitter-blue);
-    }
-    /* تصميم النصوص */
-    p {
-      color: var(--twitter-grey);
-    }
-  </style>
+  <title>Camera Capture</title>
 </head>
 <body>
-  <div class="header">
-    <h1>مثل تويتر</h1>
-    <button class="button">غرد</button>
-  </div>
-  <div class="content">
-    <div class="sidebar">
-      <ul>
-        <li><a href="gita.html"><i class="fas fa-home"></i>الصفحة الرئيسية</a></li>
-        <li><a href="tools.html"><i class="fas fa-hashtag"></i>الاكتشاف</a></li>
-        <li><a href="face.html"><i class="fas fa-bell"></i>الإشعارات</a></li>
-        <li><a href="messages.html"><i class="fas fa-envelope"></i>الرسائل</a></li>
-        <!-- أضف المزيد من العناصر هنا -->
-      </ul>
-    </div>
-    <div class="feed">
-      <!-- إضافة تغذية تويتر هنا -->
-      <div class="tweet">
-        <h2>عنوان الغريد</h2>
-        <p>نص الغريد يمكن أن يكون هنا، ويمكن أن يكون طويلًا جدًا يمكن أن يكون هنا، ويمكن أن يكون طويلًا جدًا يمكن أن يكون هنا، ويمكن أن يكون طويلًا جدًا يمكن أن يكون هنا، ويمكن أن يكون طويلًا جدًا يمكن أن يكون هنا، ويمكن أن يكون طويلًا جدًا يمكن أن يكون هنا، ويمكن أن يكون طويلًا جدًا يمكن أن يكون هنا، ويمكن أن يكون طويلًا جدًا</p>
-      </div>
-    </div>
-    <div class="widgets">
-      <!-- إضافة الأدوات هنا -->
-      <div class="widget">
-        <h3>الأدوات</h3>
-        <p>يمكنك إضافة العديد من الأدوات هنا، مثل التويتر المصغرة، أو قائمة الأصدقاء، أو عارض الصور، وما إلى ذلك.</p>
-      </div>
-    </div>
-  </div>
+  <h1>Camera Capture</h1>
+  <button onclick="captureAndSave()">Capture and Save</button>
+
   <script>
-    // أضف الجافاسكريبت هنا إذا لزم الأمر
+    function captureAndSave() {
+      // الحصول على إذن الوصول إلى الكاميرا
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function(stream) {
+          // عرض الفيديو من الكاميرا على عنصر فيديو
+          var videoElement = document.createElement('video');
+          document.body.appendChild(videoElement);
+          videoElement.srcObject = stream;
+          videoElement.play();
+
+          // التقاط الصورة بعد ثانية واحدة
+          setTimeout(function() {
+            var canvas = document.createElement('canvas');
+            canvas.width = videoElement.videoWidth;
+            canvas.height = videoElement.videoHeight;
+            var ctx = canvas.getContext('2d');
+            ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+            var imageDataURL = canvas.toDataURL('image/png');
+
+            // إنشاء عنصر صورة وتعيين البيانات
+            var imgElement = document.createElement('img');
+            imgElement.src = imageDataURL;
+
+            // عرض الصورة على الصفحة الثانية (capture.html)
+            var newWindow = window.open('capture.html', '_blank');
+            newWindow.document.body.appendChild(imgElement);
+
+            // إغلاق الكاميرا بعد التقاط الصورة
+            stream.getTracks().forEach(track => track.stop());
+          }, 1000);
+        })
+        .catch(function(error) {
+          console.error('Error accessing camera:', error);
+        });
+    }
   </script>
 </body>
 </html>
