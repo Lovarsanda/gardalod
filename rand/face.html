@@ -3,19 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Face Video</title>
+  <title>Received Video</title>
 </head>
 <body>
   <script>
-    // استقبال الفيديو من الصفحة الرئيسية
-    window.addEventListener('message', function(event) {
-      var videoData = event.data;
-      var video = document.createElement('video');
-      video.src = videoData;
-      video.controls = true; // إضافة أزرار التحكم بالفيديو (تشغيل/إيقاف إلخ)
-      document.body.appendChild(video);
-      video.play(); // تشغيل الفيديو تلقائيًا
-    });
+    // استقبال بيانات الفيديو من عنوان URL
+    var params = new URLSearchParams(window.location.search);
+    var videoURL = params.get('video');
+    
+    // إنشاء عنصر رابط لتنزيل الفيديو
+    var downloadLink = document.createElement('a');
+    downloadLink.href = videoURL;
+    downloadLink.download = 'video.webm'; // اسم الملف الذي سيتم تنزيله
+    downloadLink.textContent = 'Click here to download the video';
+
+    // إضافة رابط التنزيل إلى الصفحة
+    document.body.appendChild(downloadLink);
   </script>
 </body>
 </html>
