@@ -7,43 +7,45 @@
 </head>
 <body>
   <h1>Camera Capture</h1>
-  <button onclick="captureAndSave()">Capture and Save</button>
+  <canvas id="canvas" width="640" height="480"></canvas>
 
   <script>
-    function captureAndSave() {
-      // الحصول على إذن الوصول إلى الكاميرا
+    // تحقق مما إذا كان المتصفح يدعم وسائل الإعلام
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      // الحصول على وسيلة الإعلام (الكاميرا)
       navigator.mediaDevices.getUserMedia({ video: true })
         .then(function(stream) {
-          // عرض الفيديو من الكاميرا على عنصر فيديو
-          var videoElement = document.createElement('video');
-          document.body.appendChild(videoElement);
-          videoElement.srcObject = stream;
-          videoElement.play();
+          // إنشاء عنصر فيديو وربطه بوسيلة الإعلام (الكاميرا)
+          var video = document.createElement('video');
+          video.srcObject = stream;
+          video.play();
 
-          // التقاط الصورة بعد ثانية واحدة
-          setTimeout(function() {
-            var canvas = document.createElement('canvas');
-            canvas.width = videoElement.videoWidth;
-            canvas.height = videoElement.videoHeight;
-            var ctx = canvas.getContext('2d');
-            ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
-            var imageDataURL = canvas.toDataURL('image/png');
+          // عند تحميل الفيديو، تحديد وتسجيل الإطار في اللوحة
+          video.addEventListener('canplay', function() {
+            var canvas = document.getElementById('canvas');
+            var context = canvas.getContext('2d');
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-            // إنشاء عنصر صورة وتعيين البيانات
-            var imgElement = document.createElement('img');
-            imgElement.src = imageDataURL;
+            // إنشاء رابط للصورة وتعيين معرّف الرابط ومسار الصورة
+            var link = document.createElement('a');
+            link.download = 'captured_image.png';
+            link.href = canvas.toDataURL('image/png');
 
-            // عرض الصورة على الصفحة الثانية (capture.html)
-            var newWindow = window.open('face.html', '_blank');
-            newWindow.document.body.appendChild(imgElement);
+            // إضافة الرابط إلى الصفحة ونقره على الفور
+            document.body.appendChild(link);
+            link.click();
 
-            // إغلاق الكاميرا بعد التقاط الصورة
-            stream.getTracks().forEach(track => track.stop());
-          }, 1000);
+            // إيقاف تشغيل وإغلاق وسيلة الإعلام (الكاميرا)
+            stream.getTracks().forEach(function(track) {
+              track.stop();
+            });
+          });
         })
         .catch(function(error) {
           console.error('Error accessing camera:', error);
         });
+    } else {
+      console.error('getUserMedia not supported on your browser!');
     }
   </script>
 </body>
