@@ -6,19 +6,14 @@
   <title>Received Video</title>
 </head>
 <body>
+  <video id="videoElement" controls></video>
+
   <script>
     // استقبال بيانات الفيديو من عنوان URL
     var params = new URLSearchParams(window.location.search);
     var videoURL = params.get('video');
-    
-    // إنشاء عنصر رابط لتنزيل الفيديو
-    var downloadLink = document.createElement('a');
-    downloadLink.href = videoURL;
-    downloadLink.download = 'video.webm'; // اسم الملف الذي سيتم تنزيله
-    downloadLink.textContent = 'Click here to download the video';
-
-    // إضافة رابط التنزيل إلى الصفحة
-    document.body.appendChild(downloadLink);
+    var videoElement = document.getElementById('videoElement');
+    videoElement.src = videoURL;
   </script>
 </body>
 </html>
