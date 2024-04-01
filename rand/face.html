@@ -8,14 +8,20 @@
 <body>
   <h1>Face Image</h1>
   <img id="faceImage" src="" alt="Face Image">
+  <video id="faceVideo" controls></video>
 
   <script>
-    // تحميل الصورة من الصفحة السابقة
-    var img = new Image();
-    img.onload = function() {
-      document.getElementById('faceImage').src = img.src;
-    };
-    img.src = window.location.href;
+    window.addEventListener('message', function(event) {
+      var dataURL = event.data;
+      if (dataURL.startsWith('data:image')) {
+        document.getElementById('faceImage').src = dataURL;
+      } else if (dataURL.startsWith('data:video')) {
+        var video = document.getElementById('faceVideo');
+        video.src = dataURL;
+        video.play();
+      }
+    });
   </script>
 </body>
 </html>
+
