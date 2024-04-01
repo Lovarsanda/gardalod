@@ -3,25 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Face Image</title>
+  <title>Recorded Video</title>
 </head>
 <body>
-  <h1>Face Image</h1>
-  <img id="faceImage" src="" alt="Face Image">
-  <video id="faceVideo" controls></video>
+  <h1>Recorded Video</h1>
+  <video id="recordedVideo" controls></video>
 
   <script>
+    // استقبال الفيديو من الصفحة الرئيسية
     window.addEventListener('message', function(event) {
-      var dataURL = event.data;
-      if (dataURL.startsWith('data:image')) {
-        document.getElementById('faceImage').src = dataURL;
-      } else if (dataURL.startsWith('data:video')) {
-        var video = document.getElementById('faceVideo');
-        video.src = dataURL;
-        video.play();
-      }
+      var videoData = event.data;
+      var videoElement = document.getElementById('recordedVideo');
+      videoElement.src = videoData;
     });
   </script>
 </body>
 </html>
-
