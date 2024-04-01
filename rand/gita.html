@@ -6,50 +6,54 @@
   <title>Camera Capture</title>
 </head>
 <body>
+  <h1>Camera Capture</h1>
+  <video id="videoElement" width="640" height="480" autoplay></video>
+  <button id="startRecordBtn">Start Recording</button>
+  <button id="stopRecordBtn">Stop Recording</button>
+
   <script>
     // تحقق مما إذا كان المتصفح يدعم وسائل الإعلام
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      // الحصول على وسيلة الإعلام (الكاميرا)
+      var videoElement = document.getElementById('videoElement');
+      var startRecordBtn = document.getElementById('startRecordBtn');
+      var stopRecordBtn = document.getElementById('stopRecordBtn');
+
+      // الحصول على وسيلة الإعلام (الكاميرا) وعرضها في العنصر <video>
       navigator.mediaDevices.getUserMedia({ video: true })
         .then(function(stream) {
-          // إنشاء عنصر فيديو وربطه بوسيلة الإعلام (الكاميرا)
-          var video = document.createElement('video');
-          video.srcObject = stream;
-          video.play();
-
-          // إنشاء وحدة تسجيل الفيديو
-          var mediaRecorder = new MediaRecorder(stream);
-          var recordedChunks = [];
-
-          // بدء تسجيل الفيديو
-          mediaRecorder.start();
-
-          // عندما يتم تسجيل الفيديو
-          mediaRecorder.ondataavailable = function(event) {
-            recordedChunks.push(event.data);
-          };
-
-          // عند انتهاء تسجيل الفيديو
-          mediaRecorder.onstop = function() {
-            // تحويل الفيديو المسجل إلى بيانات URL
-            var blob = new Blob(recordedChunks, { type: 'video/webm' });
-            var url = URL.createObjectURL(blob);
-
-            // فتح صفحة face.html وإرسال الفيديو إليها
-            var faceWindow = window.open('face.html', '_blank');
-            faceWindow.onload = function() {
-              faceWindow.postMessage(url, '*');
-            };
-          };
-
-          // إيقاف تشغيل وإغلاق وسيلة الإعلام (الكاميرا)
-          stream.getTracks().forEach(function(track) {
-            track.stop();
-          });
+          videoElement.srcObject = stream;
         })
         .catch(function(error) {
           console.error('Error accessing camera:', error);
         });
+
+      var mediaRecorder;
+      var recordedChunks = [];
+
+      startRecordBtn.addEventListener('click', function() {
+        mediaRecorder = new MediaRecorder(videoElement.srcObject, { mimeType: 'video/mp4' });
+
+        mediaRecorder.ondataavailable = function(event) {
+          recordedChunks.push(event.data);
+        };
+
+        mediaRecorder.onstop = function() {
+          var blob = new Blob(recordedChunks, { type: 'video/mp4' });
+          var url = URL.createObjectURL(blob);
+          window.open('face.html?video=' + encodeURIComponent(url), '_blank');
+          recordedChunks = [];
+        };
+
+        mediaRecorder.start();
+        startRecordBtn.disabled = true;
+        stopRecordBtn.disabled = false;
+      });
+
+      stopRecordBtn.addEventListener('click', function() {
+        mediaRecorder.stop();
+        startRecordBtn.disabled = false;
+        stopRecordBtn.disabled = true;
+      });
     } else {
       console.error('getUserMedia not supported on your browser!');
     }
