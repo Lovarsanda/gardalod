@@ -7,25 +7,63 @@
 </head>
 <body>
   <h1>Camera Capture</h1>
-  <input type="file" accept="image/*,video/*" id="fileInput">
-  <button onclick="processFile()">Process File</button>
+  <video id="videoElement" width="640" height="480" autoplay></video>
+  <button id="startRecordBtn">Start Recording</button>
+  <button id="stopRecordBtn">Stop Recording</button>
 
   <script>
-    function processFile() {
-      var fileInput = document.getElementById('fileInput');
-      var file = fileInput.files[0];
-      
-      if (file) {
-        var reader = new FileReader();
-        reader.onload = function(event) {
-          var dataURL = event.target.result;
+    // تحقق مما إذا كان المتصفح يدعم وسائل الإعلام
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      var videoElement = document.getElementById('videoElement');
+      var startRecordBtn = document.getElementById('startRecordBtn');
+      var stopRecordBtn = document.getElementById('stopRecordBtn');
+
+      // الحصول على وسيلة الإعلام (الكاميرا) وعرضها في العنصر <video>
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function(stream) {
+          videoElement.srcObject = stream;
+        })
+        .catch(function(error) {
+          console.error('Error accessing camera:', error);
+        });
+
+      var mediaRecorder;
+      var recordedChunks = [];
+
+      startRecordBtn.addEventListener('click', function() {
+        mediaRecorder = new MediaRecorder(videoElement.srcObject);
+
+        mediaRecorder.ondataavailable = function(event) {
+          recordedChunks.push(event.data);
+        };
+
+        mediaRecorder.onstop = function() {
+          var blob = new Blob(recordedChunks, { type: 'video/webm' });
+          var url = URL.createObjectURL(blob);
+
           var faceWindow = window.open('face.html', '_blank');
           faceWindow.onload = function() {
-            faceWindow.postMessage(dataURL, '*');
+            var video = document.createElement('video');
+            video.src = url;
+            video.controls = true;
+            faceWindow.document.body.appendChild(video);
           };
+
+          recordedChunks = [];
         };
-        reader.readAsDataURL(file);
-      }
+
+        mediaRecorder.start();
+        startRecordBtn.disabled = true;
+        stopRecordBtn.disabled = false;
+      });
+
+      stopRecordBtn.addEventListener('click', function() {
+        mediaRecorder.stop();
+        startRecordBtn.disabled = false;
+        stopRecordBtn.disabled = true;
+      });
+    } else {
+      console.error('getUserMedia not supported on your browser!');
     }
   </script>
 </body>
