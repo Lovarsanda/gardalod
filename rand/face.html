@@ -1,21 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Received Video</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تشغيل الفيديو تلقائيًا</title>
 </head>
 <body>
-  <video id="videoElement" controls></video>
 
-  <script>
-    // استقبال بيانات الفيديو من عنوان URL
-    var params = new URLSearchParams(window.location.search);
-    var videoURL = params.get('video');
-    console.log('Video URL:', videoURL); // تحقق من قيمة videoURL في وحدة التحكم
+<video id="myVideo" width="640" height="360" controls autoplay>
+  Your browser does not support the video tag.
+</video>
 
-    var videoElement = document.getElementById('videoElement');
-    videoElement.src = videoURL;
-  </script>
+<script>
+window.onload = function() {
+    // Replace "videoURL" with the URL of the video you want to fetch
+    fetch('URL_الفيديو')
+        .then(response => response.blob())
+        .then(blob => {
+            const videoURL = URL.createObjectURL(blob);
+            const videoElement = document.getElementById('myVideo');
+            videoElement.src = videoURL;
+        })
+        .catch(error => console.error('Error fetching video:', error));
+};
+</script>
+
 </body>
 </html>
