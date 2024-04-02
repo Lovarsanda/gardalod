@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Video Display</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تشغيل الفيديو تلقائيًا</title>
 </head>
 <body>
-  <h1>Video Display</h1>
-  <video id="video" autoplay></video>
 
-  <script>
-    // تحقق مما إذا كانت النافذة الأم تحتوي على فيديو
-    if (window.opener && window.opener.document) {
-      var video = window.opener.document.querySelector('video');
-      if (video && video.srcObject) {
-        // إنشاء عنصر فيديو جديد وربطه بوسيلة الإعلام (الكاميرا)
-        var newVideo = document.getElementById('video');
-        newVideo.srcObject = video.srcObject;
-        newVideo.play();
-      }
-    }
-  </script>
+<script>
+// استرداد قيمة معلمة الاستعلام من عنوان URL
+const urlParams = new URLSearchParams(window.location.search);
+const videoUrl = urlParams.get('videoUrl');
+
+// إذا تم توفير قيمة لعنوان URL لملف الفيديو
+if (videoUrl) {
+    // إنشاء عنصر فيديو جديد وتعيين مصدره لعنوان URL المستلم
+    const videoElement = document.createElement('video');
+    videoElement.src = videoUrl;
+    videoElement.autoplay = true;
+    
+    // إضافة عنصر الفيديو إلى الجسم ليتم عرضه وتشغيله تلقائيًا
+    document.body.appendChild(videoElement);
+}
+</script>
+
 </body>
 </html>
