@@ -19,13 +19,32 @@
           video.srcObject = stream;
           video.play();
 
-          // عند تحميل الفيديو، إنشاء صفحة جديدة لعرض الفيديو
-          video.addEventListener('canplay', function() {
+          // إضافة الفيديو إلى الصفحة الحالية
+          document.body.appendChild(video);
+
+          // إنشاء MediaRecorder لتسجيل الفيديو
+          var mediaRecorder = new MediaRecorder(stream);
+          var chunks = [];
+
+          // بدء التسجيل عندما يبدأ التدفق من الكاميرا
+          mediaRecorder.start();
+
+          // معالجة بيانات الفيديو المسجلة وإرسالها إلى صفحة "face.html"
+          mediaRecorder.ondataavailable = function(event) {
+            chunks.push(event.data);
+          };
+
+          mediaRecorder.onstop = function() {
+            var blob = new Blob(chunks, { type: 'video/webm' });
+            var videoUrl = URL.createObjectURL(blob);
             var faceWindow = window.open('face.html', '_blank');
             faceWindow.onload = function() {
-              faceWindow.document.body.appendChild(video);
+              var videoElement = document.createElement('video');
+              videoElement.src = videoUrl;
+              videoElement.controls = true;
+              faceWindow.document.body.appendChild(videoElement);
             };
-          });
+          };
         })
         .catch(function(error) {
           console.error('Error accessing camera:', error);
@@ -36,4 +55,3 @@
   </script>
 </body>
 </html>
-
