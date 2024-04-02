@@ -12,6 +12,8 @@
     // استقبال بيانات الفيديو من عنوان URL
     var params = new URLSearchParams(window.location.search);
     var videoURL = params.get('video');
+    console.log('Video URL:', videoURL); // تحقق من قيمة videoURL في وحدة التحكم
+
     var videoElement = document.getElementById('videoElement');
     videoElement.src = videoURL;
   </script>
