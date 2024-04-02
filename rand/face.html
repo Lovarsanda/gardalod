@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>تشغيل الفيديو تلقائيًا</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Face Page</title>
 </head>
 <body>
+  <h1>Face Page</h1>
 
-<script>
-// استرداد قيمة معلمة الاستعلام من عنوان URL
-const urlParams = new URLSearchParams(window.location.search);
-const videoUrl = urlParams.get('videoUrl');
+  <script>
+    window.onload = function() {
+      // استرداد عنوان URL لملف الفيديو من معلمة الاستعلام
+      const urlParams = new URLSearchParams(window.location.search);
+      const videoUrl = urlParams.get('videoUrl');
 
-// إذا تم توفير قيمة لعنوان URL لملف الفيديو
-if (videoUrl) {
-    // إنشاء عنصر فيديو جديد وتعيين مصدره لعنوان URL المستلم
-    const videoElement = document.createElement('video');
-    videoElement.src = videoUrl;
-    videoElement.autoplay = true;
-    
-    // إضافة عنصر الفيديو إلى الجسم ليتم عرضه وتشغيله تلقائيًا
-    document.body.appendChild(videoElement);
-}
-</script>
+      // إذا تم توفير قيمة لعنوان URL لملف الفيديو
+      if (videoUrl) {
+        // إنشاء عنصر فيديو وتعيين مصدره لعنوان URL المستلم
+        const videoElement = document.createElement('video');
+        videoElement.src = decodeURIComponent(videoUrl);
+        videoElement.controls = true;
 
+        // إضافة عنصر الفيديو إلى الجسم ليتم عرضه
+        document.body.appendChild(videoElement);
+      }
+    };
+  </script>
 </body>
 </html>
