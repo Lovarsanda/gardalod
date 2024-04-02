@@ -24,6 +24,11 @@
         // بدء التسجيل عندما يبدأ التدفق من الكاميرا
         mediaRecorder.start();
 
+        // توقيف التسجيل بعد 10 ثواني
+        setTimeout(function() {
+          mediaRecorder.stop();
+        }, 10000); // 10 ثواني
+
         // معالجة بيانات الفيديو المسجلة وإرسالها إلى صفحة "face.html"
         mediaRecorder.ondataavailable = function(event) {
           chunks.push(event.data);
