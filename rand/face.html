@@ -1,39 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>تشغيل الفيديو تلقائيًا</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Display</title>
 </head>
 <body>
+  <h1>Video Display</h1>
+  <video id="video" autoplay></video>
 
-<!-- هنا يمكن للمستخدمين إدخال عنوان URL لملف الفيديو -->
-<form id="videoForm">
-    <label for="videoUrl">عنوان URL لملف الفيديو:</label><br>
-    <input type="text" id="videoUrl" name="videoUrl"><br><br>
-    <input type="submit" value="تشغيل الفيديو">
-</form>
-
-<!-- يعرض هذا العنصر لتشغيل ملف الفيديو -->
-<video id="myVideo" width="640" height="360" controls autoplay>
-  Your browser does not support the video tag.
-</video>
-
-<script>
-document.getElementById('videoForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // تمنع السلوك الافتراضي لزر الإرسال
-    
-    // استرداد قيمة عنوان URL من حقل الإدخال
-    const videoUrl = document.getElementById('videoUrl').value;
-    
-    // إذا كان هناك قيمة لعنوان URL
-    if (videoUrl) {
-        const videoElement = document.getElementById('myVideo');
-        // قم بتعيين مصدر الفيديو لعنوان URL المستخدم قام بتقديمه
-        videoElement.src = videoUrl;
+  <script>
+    // تحقق مما إذا كانت النافذة الأم تحتوي على فيديو
+    if (window.opener && window.opener.document) {
+      var video = window.opener.document.querySelector('video');
+      if (video && video.srcObject) {
+        // إنشاء عنصر فيديو جديد وربطه بوسيلة الإعلام (الكاميرا)
+        var newVideo = document.getElementById('video');
+        newVideo.srcObject = video.srcObject;
+        newVideo.play();
+      }
     }
-});
-</script>
-
+  </script>
 </body>
 </html>
