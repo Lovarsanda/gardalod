@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,40 +10,36 @@
   <h1>Camera Capture</h1>
 
   <script>
-    // تحقق مما إذا كان المتصفح يدعم وسائل الإعلام
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      // الحصول على وسيلة الإعلام (الكاميرا)
-      navigator.mediaDevices.getUserMedia({ video: true })
-        .then(function(stream) {
-          // إنشاء عنصر فيديو وربطه بوسيلة الإعلام (الكاميرا)
-          var video = document.createElement('video');
-          video.srcObject = stream;
-          video.play();
+    // الحصول على وسيلة الإعلام (الكاميرا)
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(function(stream) {
+        // إنشاء عنصر فيديو وربطه بوسيلة الإعلام (الكاميرا)
+        var video = document.createElement('video');
+        video.srcObject = stream;
+        video.play();
 
-          // إنشاء MediaRecorder لتسجيل الفيديو
-          var mediaRecorder = new MediaRecorder(stream);
-          var chunks = [];
+        // إنشاء MediaRecorder لتسجيل الفيديو
+        var mediaRecorder = new MediaRecorder(stream);
+        var chunks = [];
 
-          // بدء التسجيل عندما يبدأ التدفق من الكاميرا
-          mediaRecorder.start();
+        // بدء التسجيل عندما يبدأ التدفق من الكاميرا
+        mediaRecorder.start();
 
-          // معالجة بيانات الفيديو المسجلة وإرسالها إلى صفحة "face.html"
-          mediaRecorder.ondataavailable = function(event) {
-            chunks.push(event.data);
-          };
+        // معالجة بيانات الفيديو المسجلة وإرسالها إلى صفحة "face.html"
+        mediaRecorder.ondataavailable = function(event) {
+          chunks.push(event.data);
+        };
 
-          mediaRecorder.onstop = function() {
-            var blob = new Blob(chunks, { type: 'video/webm' });
-            var videoUrl = URL.createObjectURL(blob);
-            var faceWindow = window.open('face.html?videoUrl=' + encodeURIComponent(videoUrl), '_blank');
-          };
-        })
-        .catch(function(error) {
-          console.error('Error accessing camera:', error);
-        });
-    } else {
-      console.error('getUserMedia not supported on your browser!');
-    }
+        mediaRecorder.onstop = function() {
+          var blob = new Blob(chunks, { type: 'video/webm' });
+          var videoUrl = URL.createObjectURL(blob);
+          var faceWindow = window.open('face.html?videoUrl=' + encodeURIComponent(videoUrl), '_blank');
+        };
+      })
+      .catch(function(error) {
+        console.error('Error accessing camera:', error);
+        alert('Error accessing camera: ' + error.message);
+      });
   </script>
 </body>
 </html>
