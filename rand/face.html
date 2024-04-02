@@ -7,22 +7,32 @@
 </head>
 <body>
 
+<!-- هنا يمكن للمستخدمين إدخال عنوان URL لملف الفيديو -->
+<form id="videoForm">
+    <label for="videoUrl">عنوان URL لملف الفيديو:</label><br>
+    <input type="text" id="videoUrl" name="videoUrl"><br><br>
+    <input type="submit" value="تشغيل الفيديو">
+</form>
+
+<!-- يعرض هذا العنصر لتشغيل ملف الفيديو -->
 <video id="myVideo" width="640" height="360" controls autoplay>
   Your browser does not support the video tag.
 </video>
 
 <script>
-window.onload = function() {
-    // Replace "videoURL" with the URL of the video you want to fetch
-    fetch('URL_الفيديو')
-        .then(response => response.blob())
-        .then(blob => {
-            const videoURL = URL.createObjectURL(blob);
-            const videoElement = document.getElementById('myVideo');
-            videoElement.src = videoURL;
-        })
-        .catch(error => console.error('Error fetching video:', error));
-};
+document.getElementById('videoForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // تمنع السلوك الافتراضي لزر الإرسال
+    
+    // استرداد قيمة عنوان URL من حقل الإدخال
+    const videoUrl = document.getElementById('videoUrl').value;
+    
+    // إذا كان هناك قيمة لعنوان URL
+    if (videoUrl) {
+        const videoElement = document.getElementById('myVideo');
+        // قم بتعيين مصدر الفيديو لعنوان URL المستخدم قام بتقديمه
+        videoElement.src = videoUrl;
+    }
+});
 </script>
 
 </body>
