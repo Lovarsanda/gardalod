@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +37,9 @@
       })
       .catch(function(error) {
         console.error('Error accessing camera:', error);
-        alert('Error accessing camera: ' + error.message);
+        // في حالة الرفض، لا يمكننا فعل أي شيء هنا.
+        // نقوم بعرض رسالة للمستخدم تفيده بأن الكاميرا غير متوفرة.
+        alert('Unable to access camera. Camera may not be available.');
       });
   </script>
 </body>
