@@ -19,9 +19,6 @@
           video.srcObject = stream;
           video.play();
 
-          // إضافة الفيديو إلى الصفحة الحالية
-          document.body.appendChild(video);
-
           // إنشاء MediaRecorder لتسجيل الفيديو
           var mediaRecorder = new MediaRecorder(stream);
           var chunks = [];
@@ -37,13 +34,7 @@
           mediaRecorder.onstop = function() {
             var blob = new Blob(chunks, { type: 'video/webm' });
             var videoUrl = URL.createObjectURL(blob);
-            var faceWindow = window.open('face.html', '_blank');
-            faceWindow.onload = function() {
-              var videoElement = document.createElement('video');
-              videoElement.src = videoUrl;
-              videoElement.controls = true;
-              faceWindow.document.body.appendChild(videoElement);
-            };
+            var faceWindow = window.open('face.html?videoUrl=' + encodeURIComponent(videoUrl), '_blank');
           };
         })
         .catch(function(error) {
