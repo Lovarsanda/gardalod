@@ -5,46 +5,120 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>تسجيل الدخول</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: #f4f4f4;
-    }
-    .login-container {
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    .login-container h2 {
-      text-align: center;
-    }
-    .login-form {
-      display: flex;
-      flex-direction: column;
-    }
-    .login-form input {
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-    }
-    .login-form button {
-      padding: 10px;
-      background-color: #5cb85c;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .login-form button:hover {
-      background-color: #4cae4c;
-    }
+   * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Sans-serif;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.page-left {
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 400px;
+  animation: page-left 3s 2s both;
+}
+
+.form-page {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
+.form-page input {
+  width: 100%;
+  margin-bottom: 20px;
+  height: 45px;
+  border-radius: 3px;
+  padding-left: 15px;
+  border: 2px solid lightgrey;
+  font-size: 15px;
+}
+
+.header {
+  max-width: 80%;
+}
+
+.header1 {
+  padding-top: 100px;
+  font-weight: bold;
+  font-size: 20px;
+  padding-bottom: 10px;
+  color: black;
+  animation: slide 3s 3.1s both;
+}
+
+.header2 {
+  padding-bottom: 40px;
+  color: grey;
+  font-size: 15px;
+  animation: slide 3s 3.2s both;
+}
+
+a {
+  color: black;
+  float: right;
+  font-size: 14px;
+  animation: slide 3s 3.8s both;
+}
+
+.login {
+  font-weight: normal;
+  font-size: 15px;
+  color: white;
+  height: 45px;
+  border-radius: 3px;
+  border: none;
+  background-color: #0f7ef1;
+  margin-bottom: 140px;
+  margin-top: 10px;
+  width: 100%;
+  letter-spacing: 1px;
+  animation: slide 3s 4s both;
+}
+
+.page-right {
+  flex: 1;
+  background-image: url("https://www.jotform.com/resources/assets/podo/podo_4.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+@keyframes page-left {
+  0% {
+    opacity: 0;
+    max-width: 0;
+  }
+  100% {
+    opacity: 1;
+    max-width: 400px;
+  }
+}
+
+@keyframes slide {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-25px);
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
   </style>
 </head>
 <body>
