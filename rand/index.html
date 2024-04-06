@@ -4,13 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>تبرع لأهل غزة</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
       background-color: #f4f4f4;
-      direction: rtl;
     }
     header {
       background-color: #333;
@@ -24,28 +22,6 @@
     main {
       padding: 20px;
       text-align: center;
-    }
-    #donation, #progress {
-      margin-bottom: 30px;
-    }
-    form {
-      display: inline-block;
-      text-align: center;
-    }
-    form label {
-      display: block;
-      margin-bottom: 5px;
-    }
-    form input, form select, form button {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
-    }
-    button {
-      background-color: #333;
-      color: #fff;
-      border: none;
-      cursor: pointer;
     }
     footer {
       background-color: #333;
@@ -62,26 +38,39 @@
   <header>
     <h1>تبرع لأهل غزة</h1>
   </header>
-  <main>
-    <section id="donation">
+  <main class="container">
+    <section id="donation" class="mb-5">
       <h2>تبرع الآن</h2>
       <form action="#" method="post" id="donationForm">
-        <label for="amount">المبلغ المراد التبرع به:</label>
-        <input type="number" id="amount" name="amount" min="1" required>
-        <label for="payment-method">وسيلة الدفع المفضلة:</label>
-        <select id="payment-method" name="payment-method">
-          <option value="credit-card">بطاقة ائتمانية</option>
-          <option value="bank-transfer">تحويل بنكي</option>
-          <option value="paypal">باي بال</option>
-        </select>
-        <button type="submit">تبرع الآن</button>
+        <div class="form-group">
+          <label for="amount">المبلغ المراد التبرع به:</label>
+          <input type="number" class="form-control" id="amount" name="amount" min="1" required>
+        </div>
+        <div class="form-group">
+          <label for="currency">وحدة العملة:</label>
+          <select class="form-control" id="currency" name="currency">
+            <option value="USD">الدولار الأمريكي</option>
+            <option value="IQD">الدينار العراقي</option>
+            <option value="EGP">الجنيه المصري</option>
+            <!-- يمكنك إضافة المزيد من العملات حسب الحاجة -->
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="payment-method">وسيلة الدفع المفضلة:</label>
+          <select class="form-control" id="payment-method" name="payment-method">
+            <option value="credit-card">بطاقة ائتمانية</option>
+            <option value="bank-transfer">تحويل بنكي</option>
+            <option value="paypal">باي بال</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">تبرع الآن</button>
       </form>
     </section>
     <section id="progress">
       <h2>تقدم المشاريع</h2>
-      <p>تم جمع <span id="amount-raised">0</span> دينار</p>
-      <div style="background-color: #ddd; width: 100%; height: 20px; margin-bottom: 10px;">
-        <div id="progress-bar" style="background-color: #333; width: 0%; height: 100%;"></div>
+      <p>تم جمع <span id="amount-raised">0</span> دولار</p>
+      <div class="progress">
+        <div id="progress-bar" class="progress-bar bg-success" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
       </div>
     </section>
   </main>
@@ -89,28 +78,18 @@
     <p>جميع الحقوق محفوظة &copy; 2024</p>
   </footer>
 
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script>
-    const currencyMap = {
-      'العراق': 'دينار عراقي',
-      'مصر': 'جنيه مصري',
-      'السعودية': 'ريال سعودي',
-      'الإمارات': 'درهم إماراتي',
-      'لبنان': 'ليرة لبنانية',
-      'الأردن': 'دينار أردني',
-      'سوريا': 'ليرة سورية'
-      // يمكنك إضافة المزيد من البلدان حسب الحاجة
-    };
-
-    const donationForm = document.getElementById('donationForm');
-    const amountRaised = document.getElementById('amount-raised');
-    const progressBar = document.getElementById('progress-bar');
-
-    donationForm.addEventListener('submit', function(event) {
-      event.preventDefault();
-      const amount = parseFloat(document.getElementById('amount').value);
-      const currency = document.getElementById('payment-method').value;
-      amountRaised.textContent = amount.toLocaleString('ar-EG') + ' ' + currencyMap[currency];
-      progressBar.style.width = '100%';
+    $(document).ready(function() {
+      $('#donationForm').submit(function(event) {
+        event.preventDefault();
+        const amount = parseFloat($('#amount').val());
+        const currency = $('#currency').val();
+        const paymentMethod = $('#payment-method').val();
+        const amountRaised = amount.toLocaleString('ar-EG') + ' ' + currency;
+        $('#amount-raised').text(amountRaised);
+        $('#progress-bar').css('width', '100%').attr('aria-valuenow', 100);
+      });
     });
   </script>
 </body>
