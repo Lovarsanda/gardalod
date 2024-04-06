@@ -11,40 +11,47 @@
       background-color: #f4f4f4;
     }
     header {
-      background-color: #ff9800;
+      background-color: #333;
       color: #fff;
       padding: 20px;
       text-align: center;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
     }
     header h1 {
       margin: 0;
     }
     main {
-      padding: 100px 20px 20px;
+      padding: 20px;
       text-align: center;
-      margin-top: 80px;
     }
     footer {
       background-color: #333;
       color: #fff;
       padding: 10px;
       text-align: center;
+    }
+    .login-modal {
+      background-color: rgba(0, 0, 0, 0.5);
       position: fixed;
-      bottom: 0;
+      top: 0;
       left: 0;
       right: 0;
-      z-index: 1000;
+      bottom: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .login-modal-content {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     }
   </style>
 </head>
 <body>
   <header>
     <h1>تبرع لأهل غزة</h1>
+    <button class="btn btn-primary" id="loginBtn">تسجيل الدخول</button>
   </header>
   <main class="container">
     <section id="donation" class="mb-5">
@@ -91,9 +98,23 @@
     <p>جميع الحقوق محفوظة &copy; 2024</p>
   </footer>
 
+  <div class="login-modal" id="loginModal" style="display: none;">
+    <div class="login-modal-content">
+      <h2>نافذة تسجيل الدخول</h2>
+      <!-- أضف نموذج تسجيل الدخول هنا -->
+      <button class="btn btn-secondary" id="closeLoginBtn">إغلاق</button>
+    </div>
+  </div>
+
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script>
     $(document).ready(function() {
+      $('#loginBtn').click(function() {
+        $('#loginModal').fadeIn();
+      });
+      $('#closeLoginBtn').click(function() {
+        $('#loginModal').fadeOut();
+      });
       $('#donationForm').submit(function(event) {
         event.preventDefault();
         const amount = parseFloat($('#amount').val());
