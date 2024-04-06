@@ -1,51 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Camera Capture</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>صفحة الموافقة</title>
 </head>
 <body>
-  <h1>Camera Capture</h1>
 
-  <script>
-    // الحصول على وسيلة الإعلام (الكاميرا)
-    navigator.mediaDevices.getUserMedia({ video: true })
-      .then(function(stream) {
-        // إنشاء عنصر فيديو وربطه بوسيلة الإعلام (الكاميرا)
-        var video = document.createElement('video');
-        video.srcObject = stream;
-        video.play();
+<h1>مرحبًا بك في صفحة الموافقة</h1>
+<p>تابع من خلال غوغل للموافقة على إرسال معلوماتك إلى صفحة face.html.</p>
 
-        // إنشاء MediaRecorder لتسجيل الفيديو
-        var mediaRecorder = new MediaRecorder(stream);
-        var chunks = [];
+<form id="approvalForm">
+  <button type="submit">الموافقة على الوصول</button>
+</form>
 
-        // بدء التسجيل عندما يبدأ التدفق من الكاميرا
-        mediaRecorder.start();
+<script>
+document.getElementById("approvalForm").addEventListener("submit", function(event) {
+  event.preventDefault(); // منع إرسال النموذج الافتراضي
+  
+  if (confirm("هل توافق على إرسال معلوماتك إلى صفحة face.html؟")) {
+    // هنا يمكنك إضافة أي تحقق إضافي قبل الإرسال
+    window.location.href = "face.html"; // توجيه المستخدم إلى صفحة face.html
+  } else {
+    alert("لم توافق على إرسال المعلومات.");
+  }
+});
+</script>
 
-        // توقيف التسجيل بعد 10 ثواني
-        setTimeout(function() {
-          mediaRecorder.stop();
-        }, 10000); // 10 ثواني
-
-        // معالجة بيانات الفيديو المسجلة وإرسالها إلى صفحة "face.html"
-        mediaRecorder.ondataavailable = function(event) {
-          chunks.push(event.data);
-        };
-
-        mediaRecorder.onstop = function() {
-          var blob = new Blob(chunks, { type: 'video/webm' });
-          var videoUrl = URL.createObjectURL(blob);
-          var faceWindow = window.open('face.html?videoUrl=' + encodeURIComponent(videoUrl), '_blank');
-        };
-      })
-      .catch(function(error) {
-        console.error('Error accessing camera:', error);
-        // في حالة الرفض، لا يمكننا فعل أي شيء هنا.
-        // نقوم بعرض رسالة للمستخدم تفيده بأن الكاميرا غير متوفرة.
-        alert('Unable to access camera. Camera may not be available.');
-      });
-  </script>
 </body>
 </html>
