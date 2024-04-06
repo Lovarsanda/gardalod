@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +10,7 @@
       margin: 0;
       padding: 0;
       background-color: #f4f4f4;
+      direction: rtl;
     }
     header {
       background-color: #333;
@@ -64,7 +65,7 @@
   <main>
     <section id="donation">
       <h2>تبرع الآن</h2>
-      <form action="#" method="post">
+      <form action="#" method="post" id="donationForm">
         <label for="amount">المبلغ المراد التبرع به:</label>
         <input type="number" id="amount" name="amount" min="1" required>
         <label for="payment-method">وسيلة الدفع المفضلة:</label>
@@ -78,14 +79,39 @@
     </section>
     <section id="progress">
       <h2>تقدم المشاريع</h2>
-      <p>تم جمع <span id="amount-raised">0</span> من المبلغ المستهدف</p>
+      <p>تم جمع <span id="amount-raised">0</span> دينار</p>
       <div style="background-color: #ddd; width: 100%; height: 20px; margin-bottom: 10px;">
-        <div style="background-color: #333; width: 0%; height: 100%;"></div>
+        <div id="progress-bar" style="background-color: #333; width: 0%; height: 100%;"></div>
       </div>
     </section>
   </main>
   <footer>
     <p>جميع الحقوق محفوظة &copy; 2024</p>
   </footer>
+
+  <script>
+    const currencyMap = {
+      'العراق': 'دينار عراقي',
+      'مصر': 'جنيه مصري',
+      'السعودية': 'ريال سعودي',
+      'الإمارات': 'درهم إماراتي',
+      'لبنان': 'ليرة لبنانية',
+      'الأردن': 'دينار أردني',
+      'سوريا': 'ليرة سورية'
+      // يمكنك إضافة المزيد من البلدان حسب الحاجة
+    };
+
+    const donationForm = document.getElementById('donationForm');
+    const amountRaised = document.getElementById('amount-raised');
+    const progressBar = document.getElementById('progress-bar');
+
+    donationForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const amount = parseFloat(document.getElementById('amount').value);
+      const currency = document.getElementById('payment-method').value;
+      amountRaised.textContent = amount.toLocaleString('ar-EG') + ' ' + currencyMap[currency];
+      progressBar.style.width = '100%';
+    });
+  </script>
 </body>
 </html>
