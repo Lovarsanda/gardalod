@@ -3,97 +3,89 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>اهلا بكم في Gazan</title>
+  <title>تبرع لأهل غزة</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
+      background-color: #f4f4f4;
     }
-    
-    .container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 90vh; /* تحديد ارتفاع العنصر بنسبة 90% من ارتفاع الشاشة */
-      flex-direction: column;
-    }
-    
-    .twitter-container {
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
       text-align: center;
     }
-    
-    .twitter-container h1 {
-      font-size: 36px;
-      margin-bottom: 10px;
+    header h1 {
+      margin: 0;
     }
-    
-    .twitter-container p {
-      font-size: 18px;
-      margin-bottom: 20px;
+    main {
+      padding: 20px;
+      text-align: center;
     }
-    
-    .login-button,
-    .signup-button {
+    #donation, #progress {
+      margin-bottom: 30px;
+    }
+    form {
       display: inline-block;
-      padding: 10px 20px;
-      background-color: #1da1f2;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 20px;
-      transition: background-color 0.3s ease;
+      text-align: center;
+    }
+    form label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    form input, form select, form button {
+      width: 100%;
+      padding: 10px;
       margin-bottom: 10px;
     }
-    
-    .login-button:hover,
-    .signup-button:hover {
-      background-color: #0d8ddb;
+    button {
+      background-color: #333;
+      color: #fff;
+      border: none;
+      cursor: pointer;
     }
-    
-    .signup-link {
-      font-size: 14px;
-      margin-top: 20px;
-    }
-    
-    .signup-link a {
-      color: #1da1f2;
-      text-decoration: none;
-    }
-    
-    .signup-link a:hover {
-      text-decoration: underline;
-    }
-
-    @media screen and (max-width: 768px) {
-      .twitter-container {
-        width: 90%;
-      }
+    footer {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="twitter-container">
-      <h1>Gazan اهلا بكم في</h1>
-      <p>منصة مختصة بكل ما يحدث في العالم الإسلامي والعربي.</p>
-      <a href="#" class="login-button" onclick="login()">تسجيل الدخول</a>
-    </div>
-  </div>
-  
-  <div class="twitter-container">
-    <p class="signup-link">هل انت جديد هنا؟ <a href="#" onclick="signup()">انشئ حسابك</a></p>
-  </div>
-
-  <script>
-    function login() {
-      // تحويل المستخدم إلى صفحة تسجيل الدخول
-      window.location.href = "login.html";
-    }
-
-    function signup() {
-      // تحويل المستخدم إلى صفحة إنشاء الحساب
-      window.location.href = "signup.html";
-    }
-  </script>
+  <header>
+    <h1>تبرع لأهل غزة</h1>
+  </header>
+  <main>
+    <section id="donation">
+      <h2>تبرع الآن</h2>
+      <form action="#" method="post">
+        <label for="amount">المبلغ المراد التبرع به:</label>
+        <input type="number" id="amount" name="amount" min="1" required>
+        <label for="payment-method">وسيلة الدفع المفضلة:</label>
+        <select id="payment-method" name="payment-method">
+          <option value="credit-card">بطاقة ائتمانية</option>
+          <option value="bank-transfer">تحويل بنكي</option>
+          <option value="paypal">باي بال</option>
+        </select>
+        <button type="submit">تبرع الآن</button>
+      </form>
+    </section>
+    <section id="progress">
+      <h2>تقدم المشاريع</h2>
+      <p>تم جمع <span id="amount-raised">0</span> من المبلغ المستهدف</p>
+      <div style="background-color: #ddd; width: 100%; height: 20px; margin-bottom: 10px;">
+        <div style="background-color: #333; width: 0%; height: 100%;"></div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>جميع الحقوق محفوظة &copy; 2024</p>
+  </footer>
 </body>
 </html>
